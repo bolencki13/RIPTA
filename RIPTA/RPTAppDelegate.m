@@ -6,17 +6,20 @@
 //  Copyright © 2016 Brian Olencki. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "RPTAppDelegate.h"
 
-@interface AppDelegate ()
+@interface RPTAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation RPTAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"RPTRootViewController") new]];
+    
     return YES;
 }
 

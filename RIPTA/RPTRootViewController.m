@@ -6,13 +6,13 @@
 //  Copyright © 2016 Brian Olencki. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "RPTRootViewController.h"
 
-@interface ViewController ()
+@interface RPTRootViewController ()
 
 @end
 
-@implementation ViewController
+@implementation RPTRootViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
