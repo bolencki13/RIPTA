@@ -18,7 +18,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"RPTRootViewController") new]];
+    RPTRootViewController *HomeVC = [[RPTRootViewController alloc]init];
+    UINavigationController *HomeNavCont = [[UINavigationController alloc]initWithRootViewController:HomeVC];
+    RPTLeftMenuViewController *LeftMenuVC = [[RPTLeftMenuViewController alloc]init];
+    RESideMenu *SideMenuVC = [[RESideMenu alloc]initWithContentViewController:HomeNavCont leftMenuViewController:LeftMenuVC rightMenuViewController:nil];
+    
+    
+    //Just a place holder image
+    SideMenuVC.backgroundImage = [UIImage imageNamed:@"GradientPink.jpg"];
+    
+    
+    self.window.rootViewController = SideMenuVC;
+    
+    
+    //self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"RPTRootViewController") new]];
+    
+    
+    
     
     return YES;
 }

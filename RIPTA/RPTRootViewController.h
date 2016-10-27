@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-
+#import "RESideMenu.h"
 #import "RPTDetailsView.h"
 
 @interface RPTRootViewController : UIViewController <MKMapViewDelegate, RPTDetailsViewDelegate>

@@ -39,7 +39,8 @@
 
 #pragma mark - UIBarButtonItems
 - (void)handleMenu:(UIBarButtonItem*)sender {
-    
+ 
+    [self.sideMenuViewController presentLeftMenuViewController];
 }
 
 #pragma mark - MKMapViewDelegate

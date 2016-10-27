@@ -17,15 +17,18 @@ PODS:
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
+  - RESideMenu (4.0.7)
 
 DEPENDENCIES:
   - AFNetworking
   - ChameleonFramework
+  - RESideMenu
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  RESideMenu: f24c508404b49c667344c54aba7e590883533958
 
-PODFILE CHECKSUM: 9dce18677f690f6c0cc412fa1bb7b7f7f0741375
+PODFILE CHECKSUM: 98d8d966d18fdb527cf82afcb508837556b26311
 
 COCOAPODS: 1.1.1
