@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		225F7E041DC1B2FF00F78A0C /* RPTLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225F7E031DC1B2FF00F78A0C /* RPTLeftMenuViewController.m */; };
-		225F7E061DC1B6A500F78A0C /* GradientPink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 225F7E051DC1B6A500F78A0C /* GradientPink.jpg */; };
 		4048DBBD1DC167E500498A16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4048DBBC1DC167E500498A16 /* main.m */; };
 		4048DBC01DC167E500498A16 /* RPTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4048DBBF1DC167E500498A16 /* RPTAppDelegate.m */; };
 		4048DBC31DC167E500498A16 /* RPTRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4048DBC21DC167E500498A16 /* RPTRootViewController.m */; };
@@ -22,7 +21,6 @@
 /* Begin PBXFileReference section */
 		225F7E021DC1B2FF00F78A0C /* RPTLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTLeftMenuViewController.h; sourceTree = "<group>"; };
 		225F7E031DC1B2FF00F78A0C /* RPTLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTLeftMenuViewController.m; sourceTree = "<group>"; };
-		225F7E051DC1B6A500F78A0C /* GradientPink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = GradientPink.jpg; path = "../../../Weed App Images and Itmes/GradientPink.jpg"; sourceTree = "<group>"; };
 		4048DBB81DC167E500498A16 /* RIPTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RIPTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4048DBBC1DC167E500498A16 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4048DBBE1DC167E500498A16 /* RPTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPTAppDelegate.h; sourceTree = "<group>"; };
@@ -63,7 +61,6 @@
 		4048DBAF1DC167E500498A16 = {
 			isa = PBXGroup;
 			children = (
-				225F7E051DC1B6A500F78A0C /* GradientPink.jpg */,
 				4048DBBA1DC167E500498A16 /* RIPTA */,
 				4048DBB91DC167E500498A16 /* Products */,
 				8415B54E7933D0272AE7ED15 /* Pods */,
@@ -198,7 +195,6 @@
 				4048DBCB1DC167E500498A16 /* LaunchScreen.storyboard in Resources */,
 				4048DBC81DC167E500498A16 /* Assets.xcassets in Resources */,
 				4048DBC61DC167E500498A16 /* Main.storyboard in Resources */,
-				225F7E061DC1B6A500F78A0C /* GradientPink.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DBDD837BCA9FCE1394C07AB0 /* [CP] Copy Pods Resources */ = {
