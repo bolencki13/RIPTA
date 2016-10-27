@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface RPTRootViewController : UIViewController
+#import "RPTDetailsView.h"
 
-
+@interface RPTRootViewController : UIViewController <MKMapViewDelegate, RPTDetailsViewDelegate>
+@property (nonatomic, retain, readonly) MKMapView *mapView;
+@property (nonatomic, retain, readonly) UISearchBar *searchBar;
+@property (nonatomic, retain, readonly) RPTDetailsView *detailsView;
 @end
 

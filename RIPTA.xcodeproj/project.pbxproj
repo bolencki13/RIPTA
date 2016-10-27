@@ -13,6 +13,7 @@
 		4048DBC61DC167E500498A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4048DBC41DC167E500498A16 /* Main.storyboard */; };
 		4048DBC81DC167E500498A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4048DBC71DC167E500498A16 /* Assets.xcassets */; };
 		4048DBCB1DC167E500498A16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4048DBC91DC167E500498A16 /* LaunchScreen.storyboard */; };
+		40748C441DC19AA800FA7747 /* RPTDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40748C431DC19AA800FA7747 /* RPTDetailsView.m */; };
 		B379A89F54801ABFCE01D604 /* libPods-RIPTA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC02043517D37BA4B96DD466 /* libPods-RIPTA.a */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,8 @@
 		4048DBC71DC167E500498A16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4048DBCA1DC167E500498A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4048DBCC1DC167E500498A16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40748C421DC19AA800FA7747 /* RPTDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTDetailsView.h; sourceTree = "<group>"; };
+		40748C431DC19AA800FA7747 /* RPTDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTDetailsView.m; sourceTree = "<group>"; };
 		4BF8EF755974FE3A956093A8 /* Pods-RIPTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RIPTA.release.xcconfig"; path = "Pods/Target Support Files/Pods-RIPTA/Pods-RIPTA.release.xcconfig"; sourceTree = "<group>"; };
 		8524E77AFEDC6A25309C80AA /* Pods-RIPTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RIPTA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RIPTA/Pods-RIPTA.debug.xcconfig"; sourceTree = "<group>"; };
 		BC02043517D37BA4B96DD466 /* libPods-RIPTA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RIPTA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,8 +78,8 @@
 			children = (
 				4048DBBE1DC167E500498A16 /* RPTAppDelegate.h */,
 				4048DBBF1DC167E500498A16 /* RPTAppDelegate.m */,
-				4048DBC11DC167E500498A16 /* RPTRootViewController.h */,
-				4048DBC21DC167E500498A16 /* RPTRootViewController.m */,
+				40748C401DC19A8200FA7747 /* UIViewController */,
+				40748C411DC19A8900FA7747 /* UIView */,
 				4048DBC41DC167E500498A16 /* Main.storyboard */,
 				4048DBC71DC167E500498A16 /* Assets.xcassets */,
 				4048DBC91DC167E500498A16 /* LaunchScreen.storyboard */,
@@ -92,6 +95,24 @@
 				4048DBBC1DC167E500498A16 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40748C401DC19A8200FA7747 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4048DBC11DC167E500498A16 /* RPTRootViewController.h */,
+				4048DBC21DC167E500498A16 /* RPTRootViewController.m */,
+			);
+			name = UIViewController;
+			sourceTree = "<group>";
+		};
+		40748C411DC19A8900FA7747 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				40748C421DC19AA800FA7747 /* RPTDetailsView.h */,
+				40748C431DC19AA800FA7747 /* RPTDetailsView.m */,
+			);
+			name = UIView;
 			sourceTree = "<group>";
 		};
 		8415B54E7933D0272AE7ED15 /* Pods */ = {
@@ -227,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40748C441DC19AA800FA7747 /* RPTDetailsView.m in Sources */,
 				4048DBC31DC167E500498A16 /* RPTRootViewController.m in Sources */,
 				4048DBC01DC167E500498A16 /* RPTAppDelegate.m in Sources */,
 				4048DBBD1DC167E500498A16 /* main.m in Sources */,
