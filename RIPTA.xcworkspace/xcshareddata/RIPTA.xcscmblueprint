@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "050D49795CC8372F19B66EA6B3FD1308FA485F3D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "050D49795CC8372F19B66EA6B3FD1308FA485F3D" : 9223372036854775807,
+    "65344B0F5183AEF996E5923A1EF94E85E58B40E3" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "94D0CD12-8460-4A8E-BCB7-E5D0CEA8DF99",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "050D49795CC8372F19B66EA6B3FD1308FA485F3D" : "RIPTA\/",
+    "65344B0F5183AEF996E5923A1EF94E85E58B40E3" : "TheNeighborhood\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RIPTA",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "RIPTA.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bolencki13\/RIPTA.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "050D49795CC8372F19B66EA6B3FD1308FA485F3D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PrestonPerriott\/The-Neighborhood.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "65344B0F5183AEF996E5923A1EF94E85E58B40E3"
+    }
+  ]
+}
