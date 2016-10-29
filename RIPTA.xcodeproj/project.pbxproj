@@ -19,6 +19,7 @@
 		404BE8741DC2D01600A06841 /* RPTVehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8731DC2D01600A06841 /* RPTVehicle.m */; };
 		404BE8771DC2D2AE00A06841 /* RPTTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8761DC2D2AE00A06841 /* RPTTrip.m */; };
 		404BE87A1DC2D7A800A06841 /* RPTPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8791DC2D7A800A06841 /* RPTPosition.m */; };
+		405E9CCD1DC37A770046BCD6 /* RPTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */; };
 		40748C441DC19AA800FA7747 /* RPTDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40748C431DC19AA800FA7747 /* RPTDetailsView.m */; };
 		B379A89F54801ABFCE01D604 /* libPods-RIPTA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC02043517D37BA4B96DD466 /* libPods-RIPTA.a */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,8 @@
 		404BE8761DC2D2AE00A06841 /* RPTTrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTTrip.m; sourceTree = "<group>"; };
 		404BE8781DC2D7A800A06841 /* RPTPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTPosition.h; sourceTree = "<group>"; };
 		404BE8791DC2D7A800A06841 /* RPTPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTPosition.m; sourceTree = "<group>"; };
+		405E9CCB1DC37A770046BCD6 /* RPTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTLocationManager.h; sourceTree = "<group>"; };
+		405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTLocationManager.m; sourceTree = "<group>"; };
 		40748C421DC19AA800FA7747 /* RPTDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTDetailsView.h; sourceTree = "<group>"; };
 		40748C431DC19AA800FA7747 /* RPTDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTDetailsView.m; sourceTree = "<group>"; };
 		4BF8EF755974FE3A956093A8 /* Pods-RIPTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RIPTA.release.xcconfig"; path = "Pods/Target Support Files/Pods-RIPTA/Pods-RIPTA.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 		4005C3B31DC2BB91005C337D /* API */ = {
 			isa = PBXGroup;
 			children = (
+				405E9CCB1DC37A770046BCD6 /* RPTLocationManager.h */,
+				405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */,
 				4005C3B41DC2BCC7005C337D /* RPTRequestHandler.h */,
 				4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */,
 				404BE86F1DC2CFE100A06841 /* RPTBus.h */,
@@ -287,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40748C441DC19AA800FA7747 /* RPTDetailsView.m in Sources */,
+				405E9CCD1DC37A770046BCD6 /* RPTLocationManager.m in Sources */,
 				404BE87A1DC2D7A800A06841 /* RPTPosition.m in Sources */,
 				4048DBC31DC167E500498A16 /* RPTRootViewController.m in Sources */,
 				4048DBC01DC167E500498A16 /* RPTAppDelegate.m in Sources */,

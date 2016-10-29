@@ -7,6 +7,8 @@
 //
 
 #import "RPTRootViewController.h"
+#import "RPTRequestHandler.h"
+#import "RPTLocationManager.h"
 
 @interface RPTRootViewController ()
 

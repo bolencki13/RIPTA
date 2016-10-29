@@ -7,9 +7,11 @@
 //
 
 #import "RPTAppDelegate.h"
-#import "RPTRequestHandler.h"
+#import "RESideMenu.h"
+#import "RPTLeftMenuViewController.h"
+#import "RPTRootViewController.h"
 
-@interface RPTAppDelegate () <RPTRequestHandlerDelegate>
+@interface RPTAppDelegate ()
 
 @end
 
@@ -28,9 +30,7 @@
     //Just a place holder image
     SideMenuVC.backgroundImage = [UIImage imageNamed:@"GradientPink.jpg"];
     
-    
     self.window.rootViewController = SideMenuVC;
-    
     
     //self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"RPTRootViewController") new]];
     
