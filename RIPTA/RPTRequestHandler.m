@@ -40,7 +40,7 @@
             RPTBus *bus = [[RPTBus alloc] initWithJSON:feedEntity];
             [aryBusses addObject:bus];
         }
-        if ([_delegate respondsToSelector:@selector(requestHandler:didFindBus:)]) [_delegate requestHandler:self didFindBus:aryBusses];
+        if ([_delegate respondsToSelector:@selector(requestHandler:didFindBusses:)]) [_delegate requestHandler:self didFindBusses:aryBusses];
     }] resume];
 }
 @end

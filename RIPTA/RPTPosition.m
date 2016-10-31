@@ -12,8 +12,8 @@
 - (instancetype)initWithJSON:(NSDictionary*)json {
     self = [super init];
     if (self) {
-        _coordinate = CLLocationCoordinate2DMake([[json objectForKey:@"latitude"] integerValue], [[json objectForKey:@"longitude"] integerValue]);
-        _bearing = [[json objectForKey:@"bearing"] integerValue];
+        _coordinate = CLLocationCoordinate2DMake([[json objectForKey:@"latitude"] floatValue], [[json objectForKey:@"longitude"] floatValue]);
+        _bearing = [[json objectForKey:@"bearing"] floatValue];
         _odometer = [[json objectForKey:@"odometer"] floatValue];
         _speed = [[json objectForKey:@"speed"] floatValue];
     }

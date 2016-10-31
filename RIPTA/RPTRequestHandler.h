@@ -11,7 +11,7 @@
 @class RPTRequestHandler, RPTBus;
 @protocol RPTRequestHandlerDelegate <NSObject>
 @optional
-- (void)requestHandler:(RPTRequestHandler*)request didFindBus:(NSArray <RPTBus *> *)busses;
+- (void)requestHandler:(RPTRequestHandler*)request didFindBusses:(NSArray <RPTBus *> *)busses;
 - (void)requestHandler:(RPTRequestHandler*)request didNotFindBussesWithError:(NSError *)error;
 @end
 

@@ -51,6 +51,7 @@
 		405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTLocationManager.m; sourceTree = "<group>"; };
 		40748C421DC19AA800FA7747 /* RPTDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTDetailsView.h; sourceTree = "<group>"; };
 		40748C431DC19AA800FA7747 /* RPTDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTDetailsView.m; sourceTree = "<group>"; };
+		40BC03331DC7B9C200CF2E97 /* RIPTA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RIPTA.h; sourceTree = "<group>"; };
 		4BF8EF755974FE3A956093A8 /* Pods-RIPTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RIPTA.release.xcconfig"; path = "Pods/Target Support Files/Pods-RIPTA/Pods-RIPTA.release.xcconfig"; sourceTree = "<group>"; };
 		8524E77AFEDC6A25309C80AA /* Pods-RIPTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RIPTA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RIPTA/Pods-RIPTA.debug.xcconfig"; sourceTree = "<group>"; };
 		BC02043517D37BA4B96DD466 /* libPods-RIPTA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RIPTA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,18 +80,9 @@
 		4005C3B31DC2BB91005C337D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				405E9CCB1DC37A770046BCD6 /* RPTLocationManager.h */,
-				405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */,
-				4005C3B41DC2BCC7005C337D /* RPTRequestHandler.h */,
-				4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */,
-				404BE86F1DC2CFE100A06841 /* RPTBus.h */,
-				404BE8701DC2CFE100A06841 /* RPTBus.m */,
-				404BE8721DC2D01600A06841 /* RPTVehicle.h */,
-				404BE8731DC2D01600A06841 /* RPTVehicle.m */,
-				404BE8751DC2D2AE00A06841 /* RPTTrip.h */,
-				404BE8761DC2D2AE00A06841 /* RPTTrip.m */,
-				404BE8781DC2D7A800A06841 /* RPTPosition.h */,
-				404BE8791DC2D7A800A06841 /* RPTPosition.m */,
+				40BC03331DC7B9C200CF2E97 /* RIPTA.h */,
+				40BC03311DC7B99F00CF2E97 /* RIPTA */,
+				40BC03321DC7B9A500CF2E97 /* Location */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -156,6 +148,32 @@
 				40748C431DC19AA800FA7747 /* RPTDetailsView.m */,
 			);
 			name = UIView;
+			sourceTree = "<group>";
+		};
+		40BC03311DC7B99F00CF2E97 /* RIPTA */ = {
+			isa = PBXGroup;
+			children = (
+				4005C3B41DC2BCC7005C337D /* RPTRequestHandler.h */,
+				4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */,
+				404BE86F1DC2CFE100A06841 /* RPTBus.h */,
+				404BE8701DC2CFE100A06841 /* RPTBus.m */,
+				404BE8721DC2D01600A06841 /* RPTVehicle.h */,
+				404BE8731DC2D01600A06841 /* RPTVehicle.m */,
+				404BE8751DC2D2AE00A06841 /* RPTTrip.h */,
+				404BE8761DC2D2AE00A06841 /* RPTTrip.m */,
+				404BE8781DC2D7A800A06841 /* RPTPosition.h */,
+				404BE8791DC2D7A800A06841 /* RPTPosition.m */,
+			);
+			name = RIPTA;
+			sourceTree = "<group>";
+		};
+		40BC03321DC7B9A500CF2E97 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				405E9CCB1DC37A770046BCD6 /* RPTLocationManager.h */,
+				405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */,
+			);
+			name = Location;
 			sourceTree = "<group>";
 		};
 		8415B54E7933D0272AE7ED15 /* Pods */ = {

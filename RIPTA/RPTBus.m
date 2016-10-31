@@ -1,4 +1,4 @@
-//
+
 //  RPTBus.m
 //  RIPTA
 //
@@ -10,7 +10,7 @@
 
 @implementation RPTBus
 - (instancetype)initWithJSON:(NSDictionary *)json {
-    self = [super initWithJSON:json];
+    self = [super initWithJSON:[json objectForKey:@"vehicle"]];
     if (self) {
         [self setValue:[json objectForKey:@"id"] forKey:@"_identifer"];
         _deleted = [[json objectForKey:@"is_deleted"] boolValue];
