@@ -21,6 +21,7 @@
 		404BE87A1DC2D7A800A06841 /* RPTPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8791DC2D7A800A06841 /* RPTPosition.m */; };
 		405E9CCD1DC37A770046BCD6 /* RPTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */; };
 		40748C441DC19AA800FA7747 /* RPTDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40748C431DC19AA800FA7747 /* RPTDetailsView.m */; };
+		40BC03361DC7CA9000CF2E97 /* RPTSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC03351DC7CA9000CF2E97 /* RPTSearchView.m */; };
 		B379A89F54801ABFCE01D604 /* libPods-RIPTA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC02043517D37BA4B96DD466 /* libPods-RIPTA.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,8 @@
 		40748C421DC19AA800FA7747 /* RPTDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTDetailsView.h; sourceTree = "<group>"; };
 		40748C431DC19AA800FA7747 /* RPTDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTDetailsView.m; sourceTree = "<group>"; };
 		40BC03331DC7B9C200CF2E97 /* RIPTA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RIPTA.h; sourceTree = "<group>"; };
+		40BC03341DC7CA9000CF2E97 /* RPTSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTSearchView.h; sourceTree = "<group>"; };
+		40BC03351DC7CA9000CF2E97 /* RPTSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTSearchView.m; sourceTree = "<group>"; };
 		4BF8EF755974FE3A956093A8 /* Pods-RIPTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RIPTA.release.xcconfig"; path = "Pods/Target Support Files/Pods-RIPTA/Pods-RIPTA.release.xcconfig"; sourceTree = "<group>"; };
 		8524E77AFEDC6A25309C80AA /* Pods-RIPTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RIPTA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RIPTA/Pods-RIPTA.debug.xcconfig"; sourceTree = "<group>"; };
 		BC02043517D37BA4B96DD466 /* libPods-RIPTA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RIPTA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +149,8 @@
 			children = (
 				40748C421DC19AA800FA7747 /* RPTDetailsView.h */,
 				40748C431DC19AA800FA7747 /* RPTDetailsView.m */,
+				40BC03341DC7CA9000CF2E97 /* RPTSearchView.h */,
+				40BC03351DC7CA9000CF2E97 /* RPTSearchView.m */,
 			);
 			name = UIView;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				404BE87A1DC2D7A800A06841 /* RPTPosition.m in Sources */,
 				4048DBC31DC167E500498A16 /* RPTRootViewController.m in Sources */,
 				4048DBC01DC167E500498A16 /* RPTAppDelegate.m in Sources */,
+				40BC03361DC7CA9000CF2E97 /* RPTSearchView.m in Sources */,
 				404BE8711DC2CFE100A06841 /* RPTBus.m in Sources */,
 				4048DBBD1DC167E500498A16 /* main.m in Sources */,
 				404BE8741DC2D01600A06841 /* RPTVehicle.m in Sources */,

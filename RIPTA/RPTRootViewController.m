@@ -8,9 +8,12 @@
 
 #import "RPTRootViewController.h"
 #import "RIPTA.h"
+#import "RPTSearchView.h"
 
-@interface RPTRootViewController () <RPTRequestHandlerDelegate>
-
+@interface RPTRootViewController () <RPTRequestHandlerDelegate, UISearchBarDelegate> {
+    RPTSearchView *_searchView;
+    UISegmentedControl *sgcMapType;
+}
 @end
 
 @implementation RPTRootViewController
@@ -22,6 +25,7 @@
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.navigationController.navigationBar.bounds))];
     _searchBar.placeholder = @"Search";
     _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.delegate = self;
     self.navigationItem.titleView = _searchBar;
     
     _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
@@ -30,9 +34,21 @@
     _mapView.showsUserLocation = YES;
     [self.view addSubview:_mapView];
     
-    _detailsView = [[RPTDetailsView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, CGRectGetHeight(self.view.frame)-100-30, (800/17), 100) withDelegate:self];
+    _searchView = [[RPTSearchView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds)-60, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-150)];
+    [self.view addSubview:_searchView];
+    
+    sgcMapType = [[UISegmentedControl alloc] initWithItems:@[
+                                                           @"Standard",
+                                                           @"Hybrid",
+                                                           @"Satellite",
+                                                           ]];
+    sgcMapType.frame = CGRectMake(15, 7.5, CGRectGetWidth(_searchView.frame)-30, 30);
+    [sgcMapType addTarget:self action:@selector(handleMapType:) forControlEvents: UIControlEventValueChanged];
+    sgcMapType.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"mapType"];
+    [_searchView.contentView addSubview:sgcMapType];
+    
+    _detailsView = [[RPTDetailsView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, CGRectGetMinY(_searchView.frame)-100-30, (800/17), 100) withDelegate:self];
     [self.view addSubview:_detailsView];
-
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -59,6 +75,15 @@
     region.span.longitudeDelta = 0.01f;
     region.span.longitudeDelta = 0.01f;
     [_mapView setRegion:region animated:YES];
+}
+
+#pragma mark - UISearchBarDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
+//        search
+    }];
 }
 
 #pragma mark - MKMapViewDelegate
