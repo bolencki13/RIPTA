@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		225F7E041DC1B2FF00F78A0C /* RPTLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225F7E031DC1B2FF00F78A0C /* RPTLeftMenuViewController.m */; };
+		2260983D1DCA7DB200BEF13D /* RPTRoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 226098381DCA7DB200BEF13D /* RPTRoutesViewController.m */; };
+		2260983E1DCA7DB200BEF13D /* RPTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2260983A1DCA7DB200BEF13D /* RPTSettingsViewController.m */; };
+		2260983F1DCA7DB200BEF13D /* RPTTripPlannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2260983C1DCA7DB200BEF13D /* RPTTripPlannerViewController.m */; };
+		226098421DCA7DDB00BEF13D /* GradientPink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 226098401DCA7DDB00BEF13D /* GradientPink.jpg */; };
+		226098431DCA7DDB00BEF13D /* GradientPlanner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 226098411DCA7DDB00BEF13D /* GradientPlanner.jpg */; };
 		4005C3B61DC2BCC7005C337D /* RPTRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */; };
 		4048DBBD1DC167E500498A16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4048DBBC1DC167E500498A16 /* main.m */; };
 		4048DBC01DC167E500498A16 /* RPTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4048DBBF1DC167E500498A16 /* RPTAppDelegate.m */; };
@@ -28,6 +33,14 @@
 /* Begin PBXFileReference section */
 		225F7E021DC1B2FF00F78A0C /* RPTLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTLeftMenuViewController.h; sourceTree = "<group>"; };
 		225F7E031DC1B2FF00F78A0C /* RPTLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTLeftMenuViewController.m; sourceTree = "<group>"; };
+		226098371DCA7DB200BEF13D /* RPTRoutesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTRoutesViewController.h; sourceTree = "<group>"; };
+		226098381DCA7DB200BEF13D /* RPTRoutesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTRoutesViewController.m; sourceTree = "<group>"; };
+		226098391DCA7DB200BEF13D /* RPTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTSettingsViewController.h; sourceTree = "<group>"; };
+		2260983A1DCA7DB200BEF13D /* RPTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTSettingsViewController.m; sourceTree = "<group>"; };
+		2260983B1DCA7DB200BEF13D /* RPTTripPlannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTTripPlannerViewController.h; sourceTree = "<group>"; };
+		2260983C1DCA7DB200BEF13D /* RPTTripPlannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTTripPlannerViewController.m; sourceTree = "<group>"; };
+		226098401DCA7DDB00BEF13D /* GradientPink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GradientPink.jpg; sourceTree = "<group>"; };
+		226098411DCA7DDB00BEF13D /* GradientPlanner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GradientPlanner.jpg; sourceTree = "<group>"; };
 		4005C3B41DC2BCC7005C337D /* RPTRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTRequestHandler.h; sourceTree = "<group>"; };
 		4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTRequestHandler.m; sourceTree = "<group>"; };
 		4048DBB81DC167E500498A16 /* RIPTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RIPTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,10 +149,18 @@
 		40748C401DC19A8200FA7747 /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
+				226098401DCA7DDB00BEF13D /* GradientPink.jpg */,
+				226098411DCA7DDB00BEF13D /* GradientPlanner.jpg */,
 				4048DBC11DC167E500498A16 /* RPTRootViewController.h */,
 				4048DBC21DC167E500498A16 /* RPTRootViewController.m */,
 				225F7E021DC1B2FF00F78A0C /* RPTLeftMenuViewController.h */,
 				225F7E031DC1B2FF00F78A0C /* RPTLeftMenuViewController.m */,
+				226098371DCA7DB200BEF13D /* RPTRoutesViewController.h */,
+				226098381DCA7DB200BEF13D /* RPTRoutesViewController.m */,
+				226098391DCA7DB200BEF13D /* RPTSettingsViewController.h */,
+				2260983A1DCA7DB200BEF13D /* RPTSettingsViewController.m */,
+				2260983B1DCA7DB200BEF13D /* RPTTripPlannerViewController.h */,
+				2260983C1DCA7DB200BEF13D /* RPTTripPlannerViewController.m */,
 			);
 			name = UIViewController;
 			sourceTree = "<group>";
@@ -253,9 +274,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226098431DCA7DDB00BEF13D /* GradientPlanner.jpg in Resources */,
 				4048DBCB1DC167E500498A16 /* LaunchScreen.storyboard in Resources */,
 				4048DBC81DC167E500498A16 /* Assets.xcassets in Resources */,
 				4048DBC61DC167E500498A16 /* Main.storyboard in Resources */,
+				226098421DCA7DDB00BEF13D /* GradientPink.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,12 +340,15 @@
 				40748C441DC19AA800FA7747 /* RPTDetailsView.m in Sources */,
 				405E9CCD1DC37A770046BCD6 /* RPTLocationManager.m in Sources */,
 				404BE87A1DC2D7A800A06841 /* RPTPosition.m in Sources */,
+				2260983D1DCA7DB200BEF13D /* RPTRoutesViewController.m in Sources */,
 				4048DBC31DC167E500498A16 /* RPTRootViewController.m in Sources */,
 				4048DBC01DC167E500498A16 /* RPTAppDelegate.m in Sources */,
 				40BC03361DC7CA9000CF2E97 /* RPTSearchView.m in Sources */,
+				2260983F1DCA7DB200BEF13D /* RPTTripPlannerViewController.m in Sources */,
 				404BE8711DC2CFE100A06841 /* RPTBus.m in Sources */,
 				4048DBBD1DC167E500498A16 /* main.m in Sources */,
 				404BE8741DC2D01600A06841 /* RPTVehicle.m in Sources */,
+				2260983E1DCA7DB200BEF13D /* RPTSettingsViewController.m in Sources */,
 				225F7E041DC1B2FF00F78A0C /* RPTLeftMenuViewController.m in Sources */,
 				4005C3B61DC2BCC7005C337D /* RPTRequestHandler.m in Sources */,
 				404BE8771DC2D2AE00A06841 /* RPTTrip.m in Sources */,

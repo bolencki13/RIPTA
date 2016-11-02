@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RESideMenu.h"
+#import "RPTRoutesViewController.h"
+#import "RPTTripPlannerViewController.h"
+#import "RPTRootViewController.h"
+
+
 
 @interface RPTLeftMenuViewController : UIViewController
 
