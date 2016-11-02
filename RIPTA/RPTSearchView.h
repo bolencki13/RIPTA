@@ -15,11 +15,15 @@
 - (void)searchView:(RPTSearchView*)searchView didStartToCloseFromPoint:(CGPoint)point;
 @end
 
-@interface RPTSearchView : UIView <UITableViewDataSource, UITableViewDelegate>
+@interface RPTSearchView : UIView <UITableViewDataSource, UITableViewDelegate> {
+    CGRect origFrame;
+}
 @property (nonatomic, retain) NSArray *aryContent;
 @property (nonatomic, retain, readonly) UIView *contentView;
 @property (nonatomic, retain, readonly) UITableView *tableView;
 @property (nonatomic, retain, readonly) UIVisualEffectView *blurView;
 @property (nonatomic, readonly) BOOL open;
 @property (nonatomic, retain) id<RPTSearchViewDelegate> delegate;
+- (void)openAnimated:(BOOL)animated;
+- (void)closeAnimated:(BOOL)animated;
 @end

@@ -31,6 +31,8 @@
     self.layer.shadowRadius = 5;
     self.layer.shadowOpacity = 0.5;
     
+    _open = NO;
+    
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:(CGSize){10.0, 10.}].CGPath;
     self.layer.mask = maskLayer;
@@ -71,29 +73,23 @@
 - (void)handlePan:(UIPanGestureRecognizer*)recognizer {
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan: {
-            
+            if (!_open) origFrame = self.frame;
         } break;
             
         case UIGestureRecognizerStateChanged: {
-            
+            if (CGRectGetMinY(self.frame) <= CGRectGetMinY(origFrame)) {
+                CGRect frame = self.frame;
+                frame.origin.y = [recognizer locationInView:self.superview].y;
+                self.frame = frame;
+            }
         } break;
-            
+        
         case UIGestureRecognizerStateEnded: {
             if (_open) {
-//                if (percent > 75) {
-////                    close
-//                }
-//                else {
-////                    open
-//                }
-//            }
-//            else {
-//                if (percent < 25) {
-////                    close
-//                }
-//                else {
-////                    open
-//                }
+                [self closeAnimated:YES];
+            }
+            else {
+                [self openAnimated:YES];
             }
         } break;
             
@@ -103,6 +99,36 @@
             
         } break;
     }
+}
+- (void)openAnimated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect frame = self.frame;
+            frame.origin.y = CGRectGetMinY(origFrame)-CGRectGetHeight(self.frame)-10;
+            self.frame = frame;
+        }];
+    }
+    else {
+        CGRect frame = self.frame;
+        frame.origin.y = CGRectGetMinY(origFrame)-CGRectGetHeight(self.frame)-10;
+        self.frame = frame;
+    }
+    _open = YES;
+}
+- (void)closeAnimated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect frame = self.frame;
+            frame.origin.y = CGRectGetMinY(origFrame);
+            self.frame = frame;
+        }];
+    }
+    else {
+        CGRect frame = self.frame;
+        frame.origin.y = CGRectGetMinY(origFrame);
+        self.frame = frame;
+    }
+    _open = NO;
 }
 
 #pragma mark - UITableViewDataSource

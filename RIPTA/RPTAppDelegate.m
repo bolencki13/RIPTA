@@ -21,6 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{
+                                                              @"mapType" : @0,
+                                                              }];
+    
     RPTRootViewController *HomeVC = [[RPTRootViewController alloc]init];
     UINavigationController *HomeNavCont = [[UINavigationController alloc]initWithRootViewController:HomeVC];
     RPTLeftMenuViewController *LeftMenuVC = [[RPTLeftMenuViewController alloc]init];

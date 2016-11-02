@@ -46,6 +46,7 @@
     [sgcMapType addTarget:self action:@selector(handleMapType:) forControlEvents: UIControlEventValueChanged];
     sgcMapType.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"mapType"];
     [_searchView.contentView addSubview:sgcMapType];
+    [self handleMapType:sgcMapType];
     
     _detailsView = [[RPTDetailsView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, CGRectGetMinY(_searchView.frame)-100-30, (800/17), 100) withDelegate:self];
     [self.view addSubview:_detailsView];
@@ -62,9 +63,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UIBarButtonItems
+#pragma mark - Actions
 - (void)handleMenu:(UIBarButtonItem*)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
+}
+- (void)handleMapType:(UISegmentedControl*)sender {
+    switch (sender.selectedSegmentIndex) {
+        case 2:
+            _mapView.mapType = MKMapTypeSatellite;
+            break;
+        case 1:
+            _mapView.mapType = MKMapTypeHybrid;
+            break;
+        default:
+            _mapView.mapType = MKMapTypeStandard;
+            break;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"mapType"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Other
@@ -84,6 +100,7 @@
     [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
 //        search
     }];
+    
 }
 
 #pragma mark - MKMapViewDelegate
