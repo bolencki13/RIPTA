@@ -30,6 +30,14 @@
     //Just a place holder image
     SideMenuVC.backgroundImage = [UIImage imageNamed:@"GradientPink.jpg"];
     
+    SideMenuVC.menuPreferredStatusBarStyle = 1;
+    SideMenuVC.delegate = self;
+    SideMenuVC.contentViewShadowColor = [UIColor blackColor];
+    SideMenuVC.contentViewShadowOffset = CGSizeMake(0, 0);
+    SideMenuVC.contentViewShadowOpacity = .6;
+    SideMenuVC.contentViewShadowRadius = 12;
+    SideMenuVC.contentViewShadowEnabled = YES;
+    
     self.window.rootViewController = SideMenuVC;
     
     //self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"RPTRootViewController") new]];
