@@ -10,7 +10,7 @@
 #import "RIPTA.h"
 #import "RPTSearchView.h"
 
-@interface RPTRootViewController () <RPTRequestHandlerDelegate, UISearchBarDelegate> {
+@interface RPTRootViewController () <RPTRequestHandlerDelegate, RPTSearchViewDelegate, UISearchBarDelegate> {
     RPTSearchView *_searchView;
     UISegmentedControl *sgcMapType;
 }
@@ -34,20 +34,22 @@
     _mapView.showsUserLocation = YES;
     [self.view addSubview:_mapView];
     
-    _searchView = [[RPTSearchView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds)-60, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-150)];
+    _searchView = [[RPTSearchView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds)-60, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-CGRectGetHeight(self.navigationController.navigationBar.frame)-120)];
+    _searchView.delegate = self;
     [self.view addSubview:_searchView];
     
     sgcMapType = [[UISegmentedControl alloc] initWithItems:@[
-                                                           @"Standard",
-                                                           @"Hybrid",
-                                                           @"Satellite",
-                                                           ]];
+                                                             @"Standard",
+                                                             @"Hybrid",
+                                                             @"Satellite",
+                                                             ]];
     sgcMapType.frame = CGRectMake(15, 7.5, CGRectGetWidth(_searchView.frame)-30, 30);
     [sgcMapType addTarget:self action:@selector(handleMapType:) forControlEvents: UIControlEventValueChanged];
     sgcMapType.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"mapType"];
     [_searchView.contentView addSubview:sgcMapType];
+    [self handleMapType:sgcMapType];
     
-    _detailsView = [[RPTDetailsView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, CGRectGetMinY(_searchView.frame)-100-30, (800/17), 100) withDelegate:self];
+    _detailsView = [[RPTDetailsView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, CGRectGetMinY(_searchView.frame)-100-5, (800/17), 100) withDelegate:self];
     [self.view addSubview:_detailsView];
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,9 +64,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UIBarButtonItems
+#pragma mark - Actions
 - (void)handleMenu:(UIBarButtonItem*)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
+}
+- (void)handleMapType:(UISegmentedControl*)sender {
+    switch (sender.selectedSegmentIndex) {
+        case 2:
+            _mapView.mapType = MKMapTypeSatellite;
+            break;
+        case 1:
+            _mapView.mapType = MKMapTypeHybrid;
+            break;
+        default:
+            _mapView.mapType = MKMapTypeStandard;
+            break;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"mapType"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - Other
@@ -84,6 +101,7 @@
     [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
 //        search
     }];
+    
 }
 
 #pragma mark - MKMapViewDelegate
@@ -119,15 +137,36 @@
     }];
 }
 
+#pragma mark - RPTSearchViewDelegate
+- (void)searchView:(RPTSearchView *)searchView didMoveFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint {
+    [_detailsView setFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, CGRectGetMinY(_searchView.frame)-100-5, (800/17), 100)];
+}
+- (void)searchView:(RPTSearchView *)searchView didOpenToPoint:(CGPoint)point animated:(BOOL)animated {
+    [_detailsView setFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, point.y-100-5, (800/17), 100)];
+}
+- (void)searchView:(RPTSearchView *)searchView didCloseToPoint:(CGPoint)point animated:(BOOL)animated {
+    [_detailsView setFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, point.y-100-5, (800/17), 100)];
+}
+
 #pragma mark - RPTRequestHandlerDelegate
 - (void)requestHandler:(RPTRequestHandler *)request didFindBusses:(NSArray<RPTBus *> *)busses {
     [_mapView removeAnnotations:_mapView.annotations];
     
+    NSMutableArray *arySearchView = [NSMutableArray new];
     for (RPTBus *bus in busses) {
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
         [annotation setCoordinate:bus.position.coordinate];
         [_mapView addAnnotation:annotation];
+        
+        [arySearchView addObject:[NSString stringWithFormat:@"%@",bus.identifer
+                                  ]];
     }
+    
+    _searchView.dictTableView = @{
+                                  @"Busses" : arySearchView,
+                                  };
+    _searchView.shouldShowTitles = NO;
+    [_searchView.tableView reloadData];
 }
 - (void)requestHandler:(RPTRequestHandler *)request didNotFindBussesWithError:(NSError *)error {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RIPTA" message:@"Whoops, we are unable to connect to our netowrk at this time. Please try again later." preferredStyle:UIAlertControllerStyleAlert];

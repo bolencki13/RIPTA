@@ -21,6 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{
+                                                              @"mapType" : @0,
+                                                              }];
+    
     RPTRootViewController *HomeVC = [[RPTRootViewController alloc]init];
     UINavigationController *HomeNavCont = [[UINavigationController alloc]initWithRootViewController:HomeVC];
     RPTLeftMenuViewController *LeftMenuVC = [[RPTLeftMenuViewController alloc]init];
@@ -31,7 +35,7 @@
     SideMenuVC.backgroundImage = [UIImage imageNamed:@"GradientPink.jpg"];
     
     SideMenuVC.menuPreferredStatusBarStyle = 1;
-    SideMenuVC.delegate = self;
+//    SideMenuVC.delegate = self;
     SideMenuVC.contentViewShadowColor = [UIColor blackColor];
     SideMenuVC.contentViewShadowOffset = CGSizeMake(0, 0);
     SideMenuVC.contentViewShadowOpacity = .6;
