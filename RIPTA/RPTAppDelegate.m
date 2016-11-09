@@ -35,7 +35,7 @@
     SideMenuVC.backgroundImage = [UIImage imageNamed:@"GradientPink.jpg"];
     
     SideMenuVC.menuPreferredStatusBarStyle = 1;
-    SideMenuVC.delegate = self;
+//    SideMenuVC.delegate = self;
     SideMenuVC.contentViewShadowColor = [UIColor blackColor];
     SideMenuVC.contentViewShadowOffset = CGSizeMake(0, 0);
     SideMenuVC.contentViewShadowOpacity = .6;

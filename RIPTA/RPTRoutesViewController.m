@@ -108,7 +108,7 @@
        // _tableView.translatesAutoresizingMaskIntoConstraints = false;
         //_tableView.layer.masksToBounds = TRUE;
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        tableView.delegate = self;
+//        tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = NO;
         tableView.backgroundColor = [UIColor clearColor];

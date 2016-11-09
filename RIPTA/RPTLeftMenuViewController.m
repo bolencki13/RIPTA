@@ -109,7 +109,7 @@
     
     RPTRoutesViewController *VC = [[RPTRoutesViewController alloc] init];
     UINavigationController *RoutesNav = [[UINavigationController alloc]initWithRootViewController:VC];
-    RPTLeftMenuViewController *LVC = [[RPTLeftMenuViewController alloc] init];
+//    RPTLeftMenuViewController *LVC = [[RPTLeftMenuViewController alloc] init];
     RPTTripPlannerViewController *TripVC = [[RPTTripPlannerViewController alloc]init];
     UINavigationController *PlannerNav = [[UINavigationController alloc]initWithRootViewController:TripVC];
     
