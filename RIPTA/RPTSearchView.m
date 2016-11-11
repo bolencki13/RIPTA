@@ -152,7 +152,8 @@
     else {
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         UILabel *lblEmpty = [[UILabel alloc] initWithFrame:CGRectZero];
-        lblEmpty.text = @"Whoops! No infomation available.";
+        lblEmpty.numberOfLines = 2;
+        lblEmpty.text = @"Whoops!\nNo infomation available.";
         [lblEmpty sizeToFit];
         lblEmpty.center = _tableView.center;
         lblEmpty.textAlignment = NSTextAlignmentCenter;
