@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CLLocation.h>
 
 @class RPTRequestHandler, RPTBus;
 @protocol RPTRequestHandlerDelegate <NSObject>
@@ -28,4 +29,22 @@
  *
  */
 - (void)getBusses;
+
+/*
+ * Method used to order busses
+ *
+ */
+- (NSArray <RPTBus *> *)orderBusses:(NSArray <RPTBus *> *)busses byMethod:(NSComparisonResult (^)(RPTBus *bus1, RPTBus *bus2))method;
+
+/*
+ * Method used to order busses based on location
+ *
+ */
+- (NSArray <RPTBus *> *)orderBusses:(NSArray <RPTBus *> *)busses withLocation:(CLLocation*)coordinate;
+
+/*
+ * Method used to get bus schedule
+ *
+ */
+- (void)getScheduleForBusWithRoute:(NSString*)route;
 @end

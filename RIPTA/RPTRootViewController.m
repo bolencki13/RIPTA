@@ -99,7 +99,26 @@
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
-//        search
+        for (CLPlacemark *placemark in placemarks) {
+            MKCoordinateRegion region;
+            
+            CLLocationCoordinate2D coordinate = [placemark.location coordinate];
+            region.center = [(CLCircularRegion *)placemark.region center];
+            
+            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+            [annotation setCoordinate:coordinate];
+            [annotation setTitle:placemark.name];
+            [_mapView addAnnotation:annotation];
+            
+            MKMapRect zoomRect = MKMapRectNull;
+            for (id <MKAnnotation> annotation in _mapView.annotations) {
+                if ([annotation.title isEqualToString:@""]) continue;
+                MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+                MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+                zoomRect = MKMapRectUnion(zoomRect, pointRect);
+            }
+            [_mapView setVisibleMapRect:zoomRect animated:YES];
+        }
     }];
     
 }
@@ -125,7 +144,8 @@
 
 #pragma mark - RPTDetailsViewDelegate
 - (void)detailsViewDidSelectInfoButton:(RPTDetailsView*)view {
-    
+    [[RPTRequestHandler sharedHandler] getBusses];
+    [_searchView openAnimated:YES];
 }
 - (void)detailsViewDidSelectCurrentLocationButton:(RPTDetailsView*)view {
     [[RPTLocationManager sharedManager] getUserLocation:^(CLLocation *location) {
@@ -143,30 +163,34 @@
 }
 - (void)searchView:(RPTSearchView *)searchView didOpenToPoint:(CGPoint)point animated:(BOOL)animated {
     [_detailsView setFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, point.y-100-5, (800/17), 100)];
+    self.mapView.userInteractionEnabled = NO;
 }
 - (void)searchView:(RPTSearchView *)searchView didCloseToPoint:(CGPoint)point animated:(BOOL)animated {
     [_detailsView setFrame:CGRectMake(CGRectGetWidth(self.view.frame)-40-20, point.y-100-5, (800/17), 100)];
+    self.mapView.userInteractionEnabled = YES;
 }
 
 #pragma mark - RPTRequestHandlerDelegate
 - (void)requestHandler:(RPTRequestHandler *)request didFindBusses:(NSArray<RPTBus *> *)busses {
     [_mapView removeAnnotations:_mapView.annotations];
     
-    NSMutableArray *arySearchView = [NSMutableArray new];
     for (RPTBus *bus in busses) {
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
         [annotation setCoordinate:bus.position.coordinate];
         [_mapView addAnnotation:annotation];
-        
-        [arySearchView addObject:[NSString stringWithFormat:@"%@",bus.identifer
-                                  ]];
     }
     
-    _searchView.dictTableView = @{
-                                  @"Busses" : arySearchView,
-                                  };
-    _searchView.shouldShowTitles = NO;
-    [_searchView.tableView reloadData];
+    [[RPTLocationManager sharedManager] getUserLocation:^(CLLocation *location) {
+            _searchView.dictTableView = @{
+                                          @"Busses" : [[RPTRequestHandler sharedHandler] orderBusses:busses withLocation:location],
+                                          };
+        _searchView.shouldShowTitles = NO;
+        [_searchView.tableView reloadData];
+    } error:^(NSError *error) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RIPTA" message:@"Whoops, we are unable to get your current location at this time. Please try again later." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
 }
 - (void)requestHandler:(RPTRequestHandler *)request didNotFindBussesWithError:(NSError *)error {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RIPTA" message:@"Whoops, we are unable to connect to our netowrk at this time. Please try again later." preferredStyle:UIAlertControllerStyleAlert];

@@ -43,4 +43,24 @@
         if ([_delegate respondsToSelector:@selector(requestHandler:didFindBusses:)]) [_delegate requestHandler:self didFindBusses:aryBusses];
     }] resume];
 }
+- (NSArray <RPTBus *> *)orderBusses:(NSArray<RPTBus *> *)busses byMethod:(NSComparisonResult (^)(RPTBus *, RPTBus *))method {
+    return [busses sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return method(obj1, obj2);
+    }];
+}
+- (NSArray <RPTBus *> *)orderBusses:(NSArray <RPTBus *> *)busses withLocation:(CLLocation*)coordinate {
+    NSMutableArray <RPTBus *> *aryTemp = [busses mutableCopy];
+    
+    for (NSInteger x = 0; x < [busses count]; x++) {
+        for (NSInteger y = x+1; y < [busses count]; y++) {
+            if ([coordinate distanceFromLocation:[[CLLocation alloc] initWithLatitude:[aryTemp objectAtIndex:x].position.coordinate.latitude longitude:[aryTemp objectAtIndex:x].position.coordinate.longitude]] > [coordinate distanceFromLocation:[[CLLocation alloc] initWithLatitude:[aryTemp objectAtIndex:y].position.coordinate.latitude longitude:[aryTemp objectAtIndex:y].position.coordinate.longitude]]) {
+                RPTBus *tempBus = [aryTemp objectAtIndex:x];
+                [aryTemp replaceObjectAtIndex:x withObject:[aryTemp objectAtIndex:y]];
+                [aryTemp replaceObjectAtIndex:y withObject:tempBus];
+            }
+        }
+    }
+    
+    return aryTemp;
+}
 @end
