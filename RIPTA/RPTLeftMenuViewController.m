@@ -40,9 +40,11 @@
     UINavigationBar *bottomBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-44, CGRectGetWidth(self.view.frame), 44)];
     bottomBar.items = @[bottomNavigationItem];
     [self.view addSubview:bottomBar];
+    bottomBar.alpha = .45;
+    
     
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 1.5) / 2.0f, self.view.frame.size.width, 54 * 5) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 1.5) / 2.0f, self.view.frame.size.width, 54 * 3) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -89,7 +91,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"AvenirNext-Italic" size:21];
+        cell.textLabel.font = [UIFont fontWithName:@"AvenirNext-Italic" size:30];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[UIView alloc] init];

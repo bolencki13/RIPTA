@@ -9,10 +9,15 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>ChameleonFramework.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Pods-RIPTA.xcscheme</key>
 		<dict>
@@ -27,7 +32,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>05758758AFCAAA7D77901160548DC472</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>49CCC71A52B88610D469727CCAABBD50</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7A407E9839FEF742E0C0C13F70427233</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>98DE1C9B1F48D74E0233313D4CB4EABB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A3744DAF2591CDF867EF04DB478EFEE3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D57F6DD7CBDE11E457971075B0805982</key>
 		<dict>
 			<key>primary</key>
 			<true/>

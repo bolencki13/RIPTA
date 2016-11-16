@@ -10,7 +10,7 @@
 #import "RESideMenu.h"
 
 
-@interface RPTRoutesViewController () <MKMapViewDelegate, UITableViewDataSource, UITabBarDelegate, RPTRequestHandlerDelegate, UISearchBarDelegate> {
+@interface RPTRoutesViewController () <MKMapViewDelegate, UITableViewDataSource, UITabBarDelegate, RPTRequestHandlerDelegate, UISearchBarDelegate, UITableViewDelegate> {
     MKPolyline *polyline;
 }
 
@@ -23,16 +23,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _RouteNum = [NSString stringWithFormat:@"3"];
     
     
     [self SetUpMapView];
     [[RPTRequestHandler sharedHandler] setDelegate:self];
     [[RPTRequestHandler sharedHandler] getBusses];
-    [[RPTRequestHandler sharedHandler] getSiteInfo:@"3"];
+    [[RPTRequestHandler sharedHandler] getSiteInfo:_RouteNum];
     [[RPTLocationManager sharedManager] getUserLocation:^(CLLocation *location){
         [self centerOnLocation:location];
     }error:^(NSError *error){
-        
+       
     }];
     
     
@@ -43,17 +44,7 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)SetUpMapView{
-    
-   /* _TopHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), (CGRectGetHeight(self.view.frame)/2 ))];
-    [self.view addSubview:_TopHolderView];
-    _Map = [[MKMapView alloc]init];
-    _Map.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _Map.delegate = self;
-    [_TopHolderView addSubview:_Map];
-    
-    _BottomHolderView = [[UIView alloc] init];
-    _BottomHolderView.translatesAutoresizingMaskIntoConstraints = false;*/
-    
+   
     UIImage *BGImage = [UIImage imageNamed:@"GradientPlanner.jpg"];
     UIImageView *ImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     ImageView.image = BGImage;
@@ -107,19 +98,79 @@
     [_BottomHolderView.centerXAnchor constraintEqualToAnchor:_TopHolderView.centerXAnchor].active =TRUE;
     [_BottomHolderView.widthAnchor constraintEqualToAnchor:_TopHolderView.widthAnchor constant:-20].active = TRUE;
     [_BottomHolderView.topAnchor constraintEqualToAnchor:_TopHolderView.bottomAnchor constant:10].active = TRUE;
-    [_BottomHolderView.heightAnchor constraintEqualToAnchor:_TopHolderView.heightAnchor constant:-20].active = TRUE;
+    [_BottomHolderView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-5].active =TRUE;
+    
+    //[_BottomHolderView.heightAnchor constraintEqualToAnchor:_TopHolderView.heightAnchor constant:-20].active = TRUE;
+    
+    _MiddleView = [[UIView alloc]init];
+    _MiddleView.translatesAutoresizingMaskIntoConstraints = false;
+    _MiddleView.backgroundColor = [UIColor blueColor];
+    _MiddleView.layer.cornerRadius = 5;
+    _MiddleView.layer.shadowOffset = CGSizeMake(-15, 20);
+    _MiddleView.layer.shadowRadius = 5;
+    _MiddleView.layer.shadowOpacity = 1;
+    [self.view addSubview:_MiddleView];
+    
+    [_MiddleView.centerXAnchor constraintEqualToAnchor:_BottomHolderView.centerXAnchor].active = TRUE;
+    [_MiddleView.widthAnchor constraintEqualToAnchor:_BottomHolderView.widthAnchor multiplier:.87].active = TRUE;
+    [_MiddleView.bottomAnchor constraintEqualToAnchor:_BottomHolderView.topAnchor constant:-15].active =TRUE;
+    [_MiddleView.heightAnchor constraintEqualToConstant:100].active =TRUE;
+    
+    _PopUpLabel = [[UILabel alloc]init];
+    _PopUpLabel2 = [[UILabel alloc]init];
+    _PopUpLabel3 = [[UILabel alloc]init];
+    _PopUpLabel.textAlignment = NSTextAlignmentCenter;
+    _PopUpLabel2.textAlignment = NSTextAlignmentCenter;
+    _PopUpLabel3.textAlignment = NSTextAlignmentCenter;
+    _PopUpLabel.numberOfLines = 0;
+    _PopUpLabel2.numberOfLines = 0;
+    _PopUpLabel3.numberOfLines = 0;
+    _PopUpLabel.translatesAutoresizingMaskIntoConstraints = false;
+    _PopUpLabel2.translatesAutoresizingMaskIntoConstraints = false;
+    _PopUpLabel3.translatesAutoresizingMaskIntoConstraints = false;
+    _PopUpLabel.layer.masksToBounds = YES;
+    _PopUpLabel2.layer.masksToBounds = YES;
+    _PopUpLabel3.layer.masksToBounds =YES;
+    _PopUpLabel.font = [UIFont fontWithName:@"AvenirNext-Italic" size:16];
+    _PopUpLabel2.font = [UIFont fontWithName:@"AvenirNext-Italic" size:16];
+    _PopUpLabel3.font = [UIFont fontWithName:@"AvenirNext-Italic" size:14];
+    _PopUpLabel.textColor = [UIColor colorWithContrastingBlackOrWhiteColorOn:_BottomHolderView.backgroundColor isFlat:YES];
+    
+    _PopUpLabel2.textColor = [UIColor colorWithContrastingBlackOrWhiteColorOn:_BottomHolderView.backgroundColor isFlat:YES];
+    _PopUpLabel3.textColor = [UIColor colorWithContrastingBlackOrWhiteColorOn:_BottomHolderView.backgroundColor isFlat:YES];
+    
+    _MiddleView.alpha = _PopUpLabel.alpha = _PopUpLabel2.alpha = _PopUpLabel3.alpha = 0.0;
+    
+    
+    _PopUpLabel.text = @"Hellllloooooo";
+    _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+    _PopUpLabel3.text = @"Time";
+    
+    [_MiddleView addSubview:_PopUpLabel];
+    [_MiddleView addSubview:_PopUpLabel2];
+    [_MiddleView addSubview:_PopUpLabel3];
+    
+    [_PopUpLabel.centerXAnchor constraintEqualToAnchor:_MiddleView.centerXAnchor].active =TRUE;
+    [_PopUpLabel.widthAnchor constraintEqualToAnchor:_MiddleView.widthAnchor].active = TRUE;
+    [_PopUpLabel.heightAnchor constraintEqualToConstant:22].active = TRUE;
+    [_PopUpLabel.topAnchor constraintEqualToAnchor:_MiddleView.topAnchor constant:5].active=TRUE;
+    
+    [_PopUpLabel2.centerXAnchor constraintEqualToAnchor:_MiddleView.centerXAnchor].active =TRUE;
+    [_PopUpLabel2.widthAnchor constraintEqualToAnchor:_MiddleView.widthAnchor].active = TRUE;
+    [_PopUpLabel2.heightAnchor constraintEqualToConstant:22].active = TRUE;
+    [_PopUpLabel2.topAnchor constraintEqualToAnchor:_PopUpLabel.bottomAnchor constant:-3].active=TRUE;
+    
+    [_PopUpLabel3.centerXAnchor constraintEqualToAnchor:_MiddleView.centerXAnchor].active = TRUE;
+    [_PopUpLabel3.widthAnchor constraintEqualToAnchor:_MiddleView.widthAnchor].active = TRUE;
+    [_PopUpLabel3.heightAnchor constraintEqualToConstant:60].active =TRUE;
+    [_PopUpLabel3.topAnchor constraintEqualToAnchor:_PopUpLabel2.bottomAnchor constant:-5].active =TRUE;
     
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectZero];
-     //   UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 1.5) / 2.0f, self.view.frame.size.width, 54 * 5) style:UITableViewStylePlain];
-      //  UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, (_BottomHolderView.frame.origin.y), _BottomHolderView.frame.size.width, _BottomHolderView.frame.size.height) style:UITableViewStylePlain];
+     
         tableView.translatesAutoresizingMaskIntoConstraints = false;
-        
-        //tableView.style = UITableViewStylePlain;
-       // _tableView.translatesAutoresizingMaskIntoConstraints = false;
-        //_tableView.layer.masksToBounds = TRUE;
-        tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-//        tableView.delegate = self;
+               tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = NO;
         tableView.backgroundColor = [UIColor clearColor];
@@ -143,9 +194,7 @@
     _searchBar.delegate = self;
     self.navigationItem.titleView = _searchBar;
     
-    
 
-    
 }
 - (void)handleMenu:(UIBarButtonItem*)sender {
     
@@ -189,7 +238,186 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+   
+
+    switch (indexPath.row) {
+        case 0:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
+            
+            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:.45f];
+                [_PopUpLabel3 setAlpha:.45f];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+                } completion:nil];
+            }];
+        }
+
+            break;
+            case 1:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
+            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:.45f];
+                [_PopUpLabel3 setAlpha:.45f];
+
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+
+                } completion:nil];
+            }];
+        }
+
+            break;
+        case 2:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
+            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:0.45];
+                [_PopUpLabel3 setAlpha:0.45f];
+
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+
+                } completion:nil];
+            }];
+        }
+
+            break;
+        case 3:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:0.45f];
+                [_PopUpLabel3 setAlpha:0.45f];
+
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+
+                } completion:nil];
+            }];
+        }
+
+            break;
+        case 4:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+           _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
+            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:0.45f];
+                [_PopUpLabel3 setAlpha:0.45f];
+
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+
+                } completion:nil];
+            }];
+        }
+            break;
+        case 5:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
+            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:0.45f];
+                [_PopUpLabel3 setAlpha:0.45f];
+
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+
+                } completion:nil];
+            }];
+        }
+
+            break;
+        case 6:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
+            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:0.45f];
+                [_PopUpLabel3 setAlpha:0.45f];
+                
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+                    
+                } completion:nil];
+            }];
+        }
+            
+
+            break;
+        case 7:
+        {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
+            _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
+            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
+            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [_PopUpLabel setAlpha:.45f];
+                [_MiddleView setAlpha:.45f];
+                [_PopUpLabel2 setAlpha:0.45f];
+                [_PopUpLabel3 setAlpha:0.45f];
+                
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    [_PopUpLabel setAlpha:0.f];
+                    [_MiddleView setAlpha:0.f];
+                    [_PopUpLabel2 setAlpha:0.f];
+                    [_PopUpLabel3 setAlpha:0.f];
+                    
+                } completion:nil];
+            }];
+        }
+            
+            break;
+        default:
+            break;
+    }
     
     
     /*
@@ -201,16 +429,14 @@
     }
 - (void)requestHandler:(RPTRequestHandler *)request didScrapeSite:(NSArray *)siteInfo{
     
-    _Names = [siteInfo lastObject];
-    //NSLog(@"Names : %@", _Names);
-    _Times = [siteInfo mutableCopy];
-    [_Times removeLastObject];
+    
     _Locations = [siteInfo objectAtIndex:0];
     NSLog(@"Locations : %@", _Locations);
+    _Names = [siteInfo lastObject];
+    _Times = [siteInfo mutableCopy];
+    [_Times removeLastObject];
     
     
-    
-    [_tableView reloadData];
     
     CLLocationCoordinate2D coordinates[[_Locations count]];
     
@@ -229,6 +455,7 @@
         
     [annotation setTitle:[[_Locations objectAtIndex:x] objectForKey:@"name"]];
     [_Map addAnnotation:annotation];
+    
 
         coordinates[count] = coordinate;
         count++;
@@ -236,6 +463,22 @@
     
     polyline = [MKPolyline polylineWithCoordinates:coordinates count:count];
   //[_Map addOverlay:polyline];
+    
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+     });
+
+}
+- (void)mapView:(MKMapView *)mapView
+didAddAnnotationViews:(NSArray *)annotationViews
+{
+    for (MKAnnotationView *annView in annotationViews)
+    {
+        CGRect endFrame = annView.frame;
+        annView.frame = CGRectOffset(endFrame, 0, -500);
+        [UIView animateWithDuration:0.5
+                         animations:^{ annView.frame = endFrame; }];
+    }
 }
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     
@@ -257,6 +500,10 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 
     [[RPTRequestHandler sharedHandler] getSiteInfo:searchBar.text];
+    [searchBar resignFirstResponder];
+    _RouteNum = searchBar.text;
+    
+    
     
     
 }
@@ -268,7 +515,17 @@
     region.span.longitudeDelta = 0.01f;
     [_Map setRegion:region animated:YES];
 }
-
+-(NSString*)GetClosestBusTime:(NSArray*)times{
+    
+    NSDate * Now = [NSDate date];
+    NSDateFormatter *Formatter = [[NSDateFormatter alloc] init];
+    [Formatter setDateFormat:@"HH:mm"];
+    NSString *newDateString = [Formatter stringFromDate:Now];
+    NSLog(@"newDateString %@", newDateString);
+   
+    return newDateString;
+    
+}
 
 
 
