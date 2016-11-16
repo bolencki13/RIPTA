@@ -1,17 +1,20 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.2.0)
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
   - RESideMenu (4.0.7)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0
   - ChameleonFramework
   - RESideMenu
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
 
-PODFILE CHECKSUM: 7119630b447f3566955b91c85d55ac4ecf2f13a1
+PODFILE CHECKSUM: 0aaa2054c1a7710454dd7f585b3a8db03842bb42
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
