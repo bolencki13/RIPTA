@@ -7,6 +7,7 @@
 //
 
 #import "RPTSearchView.h"
+#import "RPTBus.h"
 
 @implementation RPTSearchView
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -83,7 +84,7 @@
         } break;
             
         case UIGestureRecognizerStateChanged: {
-            if (CGRectGetMinY(self.frame) <= CGRectGetMinY(origFrame)) {
+            if (CGRectGetMaxY(self.frame) > CGRectGetHeight([UIScreen mainScreen].bounds)) {
                 CGRect frame = self.frame;
                 frame.origin.y = [recognizer locationInView:self.superview].y;
                 self.frame = frame;
@@ -152,7 +153,8 @@
     else {
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         UILabel *lblEmpty = [[UILabel alloc] initWithFrame:CGRectZero];
-        lblEmpty.text = @"Whoops! No infomation available.";
+        lblEmpty.numberOfLines = 2;
+        lblEmpty.text = @"Whoops!\nNo infomation available.";
         [lblEmpty sizeToFit];
         lblEmpty.center = _tableView.center;
         lblEmpty.textAlignment = NSTextAlignmentCenter;
@@ -176,7 +178,13 @@
     }
     
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = [[_dictTableView objectForKey:[[_dictTableView allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    id item = [[_dictTableView objectForKey:[[_dictTableView allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    if ([item isKindOfClass:[RPTBus class]]) {
+        cell.textLabel.text = ((RPTBus*)[[_dictTableView objectForKey:[[_dictTableView allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row]).trip.routeID;
+    }
+    else if ([item isKindOfClass:[NSString class]]) {
+        cell.textLabel.text = [[_dictTableView objectForKey:[[_dictTableView allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    }
     
     return cell;
 }

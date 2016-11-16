@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPTPosition.h"
+#import "RPTTrip.h"
 
-@class RPTTrip, RPTPosition;
 @interface RPTVehicle : NSObject
 @property (nonatomic, retain, readonly) RPTTrip *trip;
 @property (nonatomic, retain, readonly) RPTPosition *position;
