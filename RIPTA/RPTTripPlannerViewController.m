@@ -94,6 +94,11 @@
     webView.opaque = NO;
     [self.view addSubview:webView];
 }
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self dismissKeyboard];
+}
 
 #pragma mark - Actions
 - (void)handleDeparture:(UIButton*)sender {
@@ -123,6 +128,7 @@
     } origin:sender];
 }
 - (void)executeAPI {
+    [self dismissKeyboard];
     if (![sbrFrom.text isEqualToString:@""] || ![sbrTo.text isEqualToString:@""] || ![strDate isEqualToString:@"Select"] || ![strTime isEqualToString:@"Select"]) {
         
         NSString *directionCode = @"dep";
@@ -136,5 +142,11 @@
                                                                                                                                                                     @"time" : strTime,
                                                                                                                                                                     } error:nil]];
     }
+}
+
+#pragma mark - Other
+- (void)dismissKeyboard {
+    [sbrFrom resignFirstResponder];
+    [sbrTo resignFirstResponder];
 }
 @end
