@@ -21,15 +21,25 @@
 @property (nonatomic, readwrite, strong) UITableView *tableView;
 @property (strong, nonatomic)NSArray *aryMenu;
 
-@property (strong, nonatomic)   UIImageView *imgViewBackground;
+@property (strong, nonatomic) UIImageView *imgViewBackground;
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 
 @implementation RPTLeftMenuViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIButton *btnInfo = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [btnInfo sizeToFit];
+    [btnInfo addTarget:self action:@selector(handleInfo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UINavigationItem *bottomNavigationItem = [[UINavigationItem alloc] init];
+    bottomNavigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnInfo];
+    
+    UINavigationBar *bottomBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-44, CGRectGetWidth(self.view.frame), 44)];
+    bottomBar.items = @[bottomNavigationItem];
+    [self.view addSubview:bottomBar];
     
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 1.5) / 2.0f, self.view.frame.size.width, 54 * 5) style:UITableViewStylePlain];
@@ -51,20 +61,18 @@
                      @"Settings",
                      ];
     
-    
-    
-    
     [self.view addSubview:_tableView];
-    
-    
-    
-    
-    
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Actions
+- (void)handleInfo:(UIButton*)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Info" message:@"Copyright © Brian & Preston\n\nThird part libraries retain their rights.\n- Chameleon (The MIT License (MIT))\n- RESideMenu (The MIT License (MIT))\n\nInformation is provided my RIPTA" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -75,8 +83,6 @@
     return [self.aryMenu count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     static NSString* cellIdentifier = @"ripta.cell.menu";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -89,8 +95,6 @@
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[UIView alloc] init];
     }
-    
-    
     
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.text = self.aryMenu[indexPath.row];

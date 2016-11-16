@@ -33,6 +33,18 @@
 		405E9CCD1DC37A770046BCD6 /* RPTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */; };
 		40748C441DC19AA800FA7747 /* RPTDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40748C431DC19AA800FA7747 /* RPTDetailsView.m */; };
 		40BC03361DC7CA9000CF2E97 /* RPTSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC03351DC7CA9000CF2E97 /* RPTSearchView.m */; };
+		40E4B7821DDA57D200E8C33B /* RPTRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */; };
+		40E4B7831DDA57D200E8C33B /* RPTBus.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8701DC2CFE100A06841 /* RPTBus.m */; };
+		40E4B7841DDA57D200E8C33B /* RPTVehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8731DC2D01600A06841 /* RPTVehicle.m */; };
+		40E4B7851DDA57D200E8C33B /* RPTTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8761DC2D2AE00A06841 /* RPTTrip.m */; };
+		40E4B7861DDA57D200E8C33B /* RPTPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8791DC2D7A800A06841 /* RPTPosition.m */; };
+		40E4B7871DDA57D200E8C33B /* RPTRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */; };
+		40E4B7881DDA57D200E8C33B /* RPTBus.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8701DC2CFE100A06841 /* RPTBus.m */; };
+		40E4B7891DDA57D200E8C33B /* RPTVehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8731DC2D01600A06841 /* RPTVehicle.m */; };
+		40E4B78A1DDA57D200E8C33B /* RPTTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8761DC2D2AE00A06841 /* RPTTrip.m */; };
+		40E4B78B1DDA57D200E8C33B /* RPTPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 404BE8791DC2D7A800A06841 /* RPTPosition.m */; };
+		40E4B78C1DDA57D700E8C33B /* RPTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */; };
+		40E4B78D1DDA57D800E8C33B /* RPTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E9CCC1DC37A770046BCD6 /* RPTLocationManager.m */; };
 		B379A89F54801ABFCE01D604 /* libPods-RIPTA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC02043517D37BA4B96DD466 /* libPods-RIPTA.a */; };
 /* End PBXBuildFile section */
 
@@ -165,11 +177,13 @@
 				40BC03321DC7B9A500CF2E97 /* Location */,
 			);
 			name = API;
+			path = RIPTA;
 			sourceTree = "<group>";
 		};
 		4048DBAF1DC167E500498A16 = {
 			isa = PBXGroup;
 			children = (
+				4005C3B31DC2BB91005C337D /* API */,
 				4048DBBA1DC167E500498A16 /* RIPTA */,
 				404B87481DD518C800F4C210 /* Siri */,
 				404B87541DD518C800F4C210 /* SiriUI */,
@@ -194,7 +208,6 @@
 			children = (
 				4048DBBE1DC167E500498A16 /* RPTAppDelegate.h */,
 				4048DBBF1DC167E500498A16 /* RPTAppDelegate.m */,
-				4005C3B31DC2BB91005C337D /* API */,
 				40748C401DC19A8200FA7747 /* UIViewController */,
 				40748C411DC19A8900FA7747 /* UIView */,
 				4048DBC41DC167E500498A16 /* Main.storyboard */,
@@ -513,6 +526,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				404B874B1DD518C800F4C210 /* IntentHandler.m in Sources */,
+				40E4B7891DDA57D200E8C33B /* RPTVehicle.m in Sources */,
+				40E4B78A1DDA57D200E8C33B /* RPTTrip.m in Sources */,
+				40E4B7881DDA57D200E8C33B /* RPTBus.m in Sources */,
+				40E4B7871DDA57D200E8C33B /* RPTRequestHandler.m in Sources */,
+				40E4B78B1DDA57D200E8C33B /* RPTPosition.m in Sources */,
+				40E4B78C1DDA57D700E8C33B /* RPTLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +540,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				404B87571DD518C800F4C210 /* IntentViewController.m in Sources */,
+				40E4B7841DDA57D200E8C33B /* RPTVehicle.m in Sources */,
+				40E4B7851DDA57D200E8C33B /* RPTTrip.m in Sources */,
+				40E4B7831DDA57D200E8C33B /* RPTBus.m in Sources */,
+				40E4B7821DDA57D200E8C33B /* RPTRequestHandler.m in Sources */,
+				40E4B7861DDA57D200E8C33B /* RPTPosition.m in Sources */,
+				40E4B78D1DDA57D800E8C33B /* RPTLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +788,7 @@
 				404B87651DD518C800F4C210 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		404B87671DD518C800F4C210 /* Build configuration list for PBXNativeTarget "Siri" */ = {
 			isa = XCConfigurationList;
@@ -771,6 +797,7 @@
 				404B87631DD518C800F4C210 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
