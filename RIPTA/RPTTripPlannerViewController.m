@@ -11,7 +11,6 @@
 #import <WebKit/WebKit.h>
 #import <ChameleonFramework/Chameleon.h>
 #import <ActionSheetPicker.h>
-#import <AFNetworking/afnetworking.h>
 
 @interface RPTTripPlannerViewController () {
     UISearchBar *sbrFrom;
@@ -131,16 +130,37 @@
     [self dismissKeyboard];
     if (![sbrFrom.text isEqualToString:@""] || ![sbrTo.text isEqualToString:@""] || ![strDate isEqualToString:@"Select"] || ![strTime isEqualToString:@"Select"]) {
         
-        NSString *directionCode = @"dep";
-        if ([strDirection isEqualToString:@"Arrive By"]) directionCode = @"arr";
-        else if ([strDirection isEqualToString:@"Depart At"]) directionCode = @"dep";
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"dd/mm/yyyy hh:mma"];
+
+        NSURL *url = nil;
+        if ([strDirection isEqualToString:@"Arrive By"]) {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&sensor=true&mode=transit&region=US&arrival_time=%@&alternatives=true",[sbrFrom.text stringByReplacingOccurrencesOfString:@" " withString:@"+"],[sbrTo.text stringByReplacingOccurrencesOfString:@" " withString:@"+"],[NSString stringWithFormat:@"%f",[[dateFormatter dateFromString:[NSString stringWithFormat:@"%@ %@",strDate,strTime]] timeIntervalSince1970]]]];
+        }
+        else {
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&sensor=true&mode=transit&region=US&departure_time=%@&alternatives=true",[sbrFrom.text stringByReplacingOccurrencesOfString:@" " withString:@"+"],[sbrTo.text stringByReplacingOccurrencesOfString:@" " withString:@"+"],[NSString stringWithFormat:@"%f",[[dateFormatter dateFromString:[NSString stringWithFormat:@"%@ %@",strDate,strTime]] timeIntervalSince1970]]]];
+        }
         
-        [webView loadRequest:[[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://www.ripta.com/site/get_directions.php" parameters:@{
-                                                                                                                                                                    @"from" : sbrFrom.text,
-                                                                                                                                                                    @"to" : sbrTo.text,
-                                                                                                                                                                @"direction" : directionCode,                                                                                                                                                                    @"date" : strDate,
-                                                                                                                                                                    @"time" : strTime,
-                                                                                                                                                                    } error:nil]];
+        NSError *error = nil;
+        NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+        if (error) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RIPTA" message:@"Whoops, we are unable to get your directions at this time. Please try again later." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            return;
+        }
+        else if (data) {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            if (error) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RIPTA" message:@"Whoops, we are unable to get your directions at this time. Please try again later." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+                return;
+            }
+            
+            
+            
+        }
     }
 }
 
