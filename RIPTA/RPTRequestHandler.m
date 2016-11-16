@@ -46,7 +46,7 @@
 - (void)getSiteInfo:(NSString *)RTNum{
     
     NSString *url = @"http://www.ripta.com/";
-    NSString *fullstring = [url stringByAppendingString:RTNum];
+    __block NSString *fullstring = [url stringByAppendingString:RTNum];
     
  [[[NSURLSession sharedSession]dataTaskWithURL:[NSURL URLWithString:fullstring] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
         if (error) {
@@ -62,7 +62,7 @@
      NSRange Timerange = [dataString rangeOfString:@"tbody"];
      NSString *substring2 = [[dataString substringFromIndex:NSMaxRange(Timerange)]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
      
-     
+    
      NSMutableArray *LabelNames = [[NSMutableArray alloc]init];
      NSString *LabelName = nil;
      
@@ -114,16 +114,29 @@
     // NSLog(@"Clear Times : %@", TimeTable);
      
      int AllTimesCount = (int)TimeTable.count;
+    
+     NSMutableArray *arrayindexes = [NSMutableArray array];
      
-     
-     for (int x = 0; x > AllTimesCount; x++){
+     for (int x = 1; x < AllTimesCount; x++){
          
-         if ([TimeTable objectAtIndex:x] == [TimeTable objectAtIndex:x-1]) {
-             [TimeTable removeObjectAtIndex:x];
+         if ([[TimeTable objectAtIndex:x] isEqualToString:@"-"]) {
+             
+             x++;
+             
+         
+         if ([[TimeTable objectAtIndex:x] isEqualToString:[TimeTable objectAtIndex:x-1]]) {
+             [arrayindexes addObject:[NSNumber numberWithInteger:x]];
+         }
+             
          }
      }
+     NSLog(@"Index : %@", arrayindexes);
      
-    
+     for (int x = (int)arrayindexes.count - 1; x > 0; x--) {
+         [TimeTable removeObjectAtIndex:((NSNumber *)[arrayindexes objectAtIndex:x]).integerValue];
+         
+     }
+     
      
      NSMutableArray *ArrayOfArrays = [NSMutableArray array];
      
@@ -138,13 +151,63 @@
          j = j + range.length;
          
      }
-     NSLog(@"Array of Arrays : %@", ArrayOfArrays);
+    
+     
+     [ArrayOfArrays addObject:NoDups];
+     
+      NSLog(@"Array of Arrays : %@", ArrayOfArrays);
      
      
+     NSMutableArray *aryItems = [NSMutableArray new];
      
+    
+     
+     NSRange beginning = [dataString rangeOfString:@"var stops"];
+     if (beginning.location != NSNotFound) {
+         dataString = [dataString substringFromIndex:beginning.location+beginning.length];
+         
+         NSRange ending = [dataString rangeOfString:@"</script>"];
+         if (ending.location != NSNotFound) {
+             dataString = [dataString substringToIndex:ending.location];
+             
+             for (NSString *line in [dataString componentsSeparatedByString:@"\n"]) {
+                 NSMutableDictionary *dictTemp = [NSMutableDictionary new];
+                 beginning = [line rangeOfString:@"\""];
+                 if (beginning.location != NSNotFound) {
+                     NSString *name = [line substringFromIndex:beginning.location+beginning.length];
+                     ending = [name rangeOfString:@"\""];
+                     if (ending.location != NSNotFound) {
+                         name = [name substringToIndex:ending.location];
+                         [dictTemp setObject:name forKey:@"name"];
+                         beginning = [line rangeOfString:@"\","];
+                         if (beginning.location != NSNotFound) {
+                             NSString *coordinates = [line substringFromIndex:beginning.location+beginning.length];
+                             ending = [coordinates rangeOfString:@",\""];
+                             if (ending.location != NSNotFound) {
+                                 coordinates = [coordinates substringToIndex:ending.location];
+                                 NSArray *aryTemp = [coordinates componentsSeparatedByString:@","];
+                                 if ([aryTemp count] == 2) {
+                                     [dictTemp setObject:[aryTemp objectAtIndex:0] forKey:@"latitude"];
+                                     [dictTemp setObject:[aryTemp objectAtIndex:1] forKey:@"longitude"];
+                                 }
+                             }
+                         }
+                     }
+                 }
+                 [aryItems addObject:dictTemp];
+             }
+         }
+     }
+     
+     
+     NSLog(@"Array Items : %@", aryItems);
+     [ArrayOfArrays insertObject:aryItems atIndex:0];
      
      
      if ([_delegate respondsToSelector:@selector(requestHandler:didScrapeSite:)]) [_delegate requestHandler:self didScrapeSite:ArrayOfArrays];
+     
+     
+     
      
      
  }]resume] ;

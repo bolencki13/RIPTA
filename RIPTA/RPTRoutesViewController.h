@@ -19,7 +19,11 @@
 @property (strong, nonatomic)MKMapView *Map;
 @property (strong, nonatomic)UITableView *RoutesTableView;
 @property (nonatomic,  strong) UITableView *tableView;
-@property (strong, nonatomic)UIWindow *window;
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) NSMutableArray *Names;
+@property (nonatomic, retain, readonly) UISearchBar *searchBar;
+@property (nonatomic, strong) NSMutableArray *Times;
+@property (nonatomic, strong) NSMutableArray *Locations;
 
 
 @end

@@ -61,8 +61,7 @@
     [[RPTRequestHandler sharedHandler] getBusses];
     [self detailsViewDidSelectCurrentLocationButton:nil];
     
-    
-    [[RPTRequestHandler sharedHandler] getSiteInfo:@"3"];
+
     
     
 }
@@ -213,10 +212,5 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"RIPTA" message:@"Whoops, we are unable to connect to our netowrk at this time. Please try again later." preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
-}
-- (void)requestHandler:(RPTRequestHandler *)request didScrapeSite:(NSArray *)siteInfo{
-    
-    
-    
 }
 @end

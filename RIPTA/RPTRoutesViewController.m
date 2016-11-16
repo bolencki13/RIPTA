@@ -10,7 +10,9 @@
 #import "RESideMenu.h"
 
 
-@interface RPTRoutesViewController () <MKMapViewDelegate, UITableViewDataSource, UITabBarDelegate, RPTRequestHandlerDelegate>
+@interface RPTRoutesViewController () <MKMapViewDelegate, UITableViewDataSource, UITabBarDelegate, RPTRequestHandlerDelegate, UISearchBarDelegate> {
+    MKPolyline *polyline;
+}
 
 
 
@@ -26,6 +28,12 @@
     [self SetUpMapView];
     [[RPTRequestHandler sharedHandler] setDelegate:self];
     [[RPTRequestHandler sharedHandler] getBusses];
+    [[RPTRequestHandler sharedHandler] getSiteInfo:@"3"];
+    [[RPTLocationManager sharedManager] getUserLocation:^(CLLocation *location){
+        [self centerOnLocation:location];
+    }error:^(NSError *error){
+        
+    }];
     
     
 }
@@ -70,12 +78,13 @@
     [_TopHolderView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = TRUE;
     [_TopHolderView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = TRUE;
     [_TopHolderView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = TRUE;
-    [_TopHolderView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:.5].active =TRUE;
+    [_TopHolderView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:.55].active =TRUE;
     
     _Map = [[MKMapView alloc ]init];
     _Map.translatesAutoresizingMaskIntoConstraints  = false;
     _Map.layer.masksToBounds = YES;
-    
+    _Map.delegate = self;
+    _Map.showsUserLocation = TRUE;
     [_TopHolderView addSubview:_Map];
     
     [_Map.widthAnchor constraintEqualToAnchor:_TopHolderView.widthAnchor].active =TRUE;
@@ -128,6 +137,14 @@
     [_tableView.topAnchor constraintEqualToAnchor:_BottomHolderView.topAnchor].active = TRUE;
     [_tableView.heightAnchor constraintEqualToAnchor:_BottomHolderView.heightAnchor].active = TRUE;
     
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.navigationController.navigationBar.bounds))];
+    _searchBar.placeholder = @"Search for Routes";
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.delegate = self;
+    self.navigationItem.titleView = _searchBar;
+    
+    
+
     
 }
 - (void)handleMenu:(UIBarButtonItem*)sender {
@@ -141,7 +158,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 35;
+    return [_Names count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -163,7 +180,7 @@
     
     
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = @"Bus Route Info";
+    cell.textLabel.text = [_Names objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -172,6 +189,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    
+    
+    
     /*
      Check if currently visible controller is equal to item selected.
      if not - fade to new UIViewController
@@ -179,8 +199,77 @@
      */
     
     }
-- (void)requestHandler:(RPTRequestHandler *)request didFindBusses:(NSArray<RPTBus *> *)busses{
+- (void)requestHandler:(RPTRequestHandler *)request didScrapeSite:(NSArray *)siteInfo{
+    
+    _Names = [siteInfo lastObject];
+    //NSLog(@"Names : %@", _Names);
+    _Times = [siteInfo mutableCopy];
+    [_Times removeLastObject];
+    _Locations = [siteInfo objectAtIndex:0];
+    NSLog(@"Locations : %@", _Locations);
+    
+    
+    
+    [_tableView reloadData];
+    
+    CLLocationCoordinate2D coordinates[[_Locations count]];
+    
+    NSInteger count = 0;
+    for (int x = 0 ; x < [_Locations count]; x++) {
+        
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[[_Locations objectAtIndex:x]objectForKey:@"latitude"] doubleValue], [[[_Locations objectAtIndex:x]objectForKey:@"longitude"] doubleValue]);
+        if (!CLLocationCoordinate2DIsValid(coordinate) || !(coordinate.longitude != 0 && coordinate.latitude != 0)) continue;
+        NSLog(@"Long : %f", coordinate.longitude);
+        NSLog(@"Lat : %f", coordinate.latitude);
+
+        
+        
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    [annotation setCoordinate:coordinate];
+        
+    [annotation setTitle:[[_Locations objectAtIndex:x] objectForKey:@"name"]];
+    [_Map addAnnotation:annotation];
+
+        coordinates[count] = coordinate;
+        count++;
+    }
+    
+    polyline = [MKPolyline polylineWithCoordinates:coordinates count:count];
+  //[_Map addOverlay:polyline];
+}
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    
+    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"pin"];
+    
+    if (annotation == _Map.userLocation) {
+        return nil;
+    }
+    return pin;
+}
+-(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay{
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc]initWithPolyline:overlay];
+    renderer.strokeColor = [UIColor blueColor];
+    renderer.lineWidth = 4.0;
+    return renderer;
+    
     
 }
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+
+    [[RPTRequestHandler sharedHandler] getSiteInfo:searchBar.text];
+    
+    
+}
+- (void)centerOnLocation:(CLLocation*)location {
+    MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+    region.center.latitude = location.coordinate.latitude;
+    region.center.longitude = location.coordinate.longitude;
+    region.span.longitudeDelta = 0.01f;
+    region.span.longitudeDelta = 0.01f;
+    [_Map setRegion:region animated:YES];
+}
+
+
+
 
 @end
