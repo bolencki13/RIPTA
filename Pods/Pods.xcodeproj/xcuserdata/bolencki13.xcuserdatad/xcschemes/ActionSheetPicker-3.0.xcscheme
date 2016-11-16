@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7A407E9839FEF742E0C0C13F70427233'
-               BlueprintName = 'RESideMenu'
+               BlueprintIdentifier = '98DE1C9B1F48D74E0233313D4CB4EABB'
+               BlueprintName = 'ActionSheetPicker-3.0'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libRESideMenu.a'>
+               BuildableName = 'libActionSheetPicker-3.0.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

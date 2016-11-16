@@ -4,41 +4,45 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ChameleonFramework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-RIPTA.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>RESideMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>49CCC71A52B88610D469727CCAABBD50</key>
+		<key>05758758AFCAAA7D77901160548DC472</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>834130EDEA6ABFC84777433FFFD0CC58</key>
+		<key>7A407E9839FEF742E0C0C13F70427233</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>935A7E52B6D8B7E37EAEA138EDC52155</key>
+		<key>98DE1C9B1F48D74E0233313D4CB4EABB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D57F6DD7CBDE11E457971075B0805982</key>
 		<dict>
 			<key>primary</key>
 			<true/>
