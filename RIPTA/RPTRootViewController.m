@@ -96,31 +96,41 @@
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    __block NSMutableArray *arySearch = [NSMutableArray new];
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
         for (CLPlacemark *placemark in placemarks) {
-            MKCoordinateRegion region;
-            
-            CLLocationCoordinate2D coordinate = [placemark.location coordinate];
-            region.center = [(CLCircularRegion *)placemark.region center];
-            
-            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-            [annotation setCoordinate:coordinate];
-            [annotation setTitle:placemark.name];
-            [_mapView addAnnotation:annotation];
-            
-            MKMapRect zoomRect = MKMapRectNull;
-            for (id <MKAnnotation> annotation in _mapView.annotations) {
-                if ([annotation.title isEqualToString:@""]) continue;
-                MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-                MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-                zoomRect = MKMapRectUnion(zoomRect, pointRect);
+            if (placemark.name) {
+                MKCoordinateRegion region;
+                
+                CLLocationCoordinate2D coordinate = [placemark.location coordinate];
+                region.center = [(CLCircularRegion *)placemark.region center];
+                
+                MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+                [annotation setCoordinate:coordinate];
+                [annotation setTitle:placemark.name];
+                [_mapView addAnnotation:annotation];
+                
+                [arySearch addObject:placemark.name];
             }
-            [_mapView setVisibleMapRect:zoomRect animated:YES];
         }
+        
+        MKMapRect zoomRect = MKMapRectNull;
+        for (id <MKAnnotation> annotation in _mapView.annotations) {
+            if ([annotation.title isEqualToString:@""]) continue;
+            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        }
+        [_mapView setVisibleMapRect:zoomRect animated:YES];
+        
+        _searchView.dictTableView = @{
+                                      @"Search" : arySearch,
+                                      };
+        _searchView.shouldShowTitles = NO;
+        [_searchView.tableView reloadData];
     }];
-    
 }
 
 #pragma mark - MKMapViewDelegate
