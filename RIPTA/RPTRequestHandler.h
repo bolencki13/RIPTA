@@ -31,11 +31,8 @@
  *
  */
 - (void)getBusses;
-<<<<<<< HEAD
 - (void)getSiteInfo:(NSString *)RTNum;
 
-
-=======
 
 /*
  * Method used to order busses
@@ -54,5 +51,4 @@
  *
  */
 - (void)getScheduleForBusWithRoute:(NSString*)route;
->>>>>>> 4d6e5921e7d3cb10c31b84cd51d1fef335cf1637
 @end

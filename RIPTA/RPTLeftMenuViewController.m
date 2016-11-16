@@ -115,7 +115,6 @@
     UINavigationController *RoutesNav = [[UINavigationController alloc]initWithRootViewController:VC];
 //    RPTLeftMenuViewController *LVC = [[RPTLeftMenuViewController alloc] init];
     RPTTripPlannerViewController *TripVC = [[RPTTripPlannerViewController alloc]init];
-    UINavigationController *PlannerNav = [[UINavigationController alloc]initWithRootViewController:TripVC];
     
     
     /*
@@ -149,7 +148,7 @@
     }
     else if ([item isEqualToString:@"Trip Planner"]) {
         [self.sideMenuViewController hideMenuViewController];
-        [self.sideMenuViewController setContentViewController:PlannerNav];
+        [self.sideMenuViewController setContentViewController:TripVC];
     }
     else if ([item isEqualToString:@"Settings"]) {
         

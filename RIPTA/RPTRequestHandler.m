@@ -43,7 +43,6 @@
         if ([_delegate respondsToSelector:@selector(requestHandler:didFindBusses:)]) [_delegate requestHandler:self didFindBusses:aryBusses];
     }] resume];
 }
-<<<<<<< HEAD
 - (void)getSiteInfo:(NSString *)RTNum{
     
     NSString *url = @"http://www.ripta.com/";
@@ -149,12 +148,11 @@
      
      
  }]resume] ;
-    
-    
+}
+
     
 
 
-=======
 - (NSArray <RPTBus *> *)orderBusses:(NSArray<RPTBus *> *)busses byMethod:(NSComparisonResult (^)(RPTBus *, RPTBus *))method {
     return [busses sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return method(obj1, obj2);
@@ -174,6 +172,5 @@
     }
     
     return aryTemp;
->>>>>>> 4d6e5921e7d3cb10c31b84cd51d1fef335cf1637
 }
 @end
