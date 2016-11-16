@@ -11,6 +11,7 @@
 #import <WebKit/WebKit.h>
 #import <ChameleonFramework/Chameleon.h>
 #import <ActionSheetPicker.h>
+#import <AFNetworking/afnetworking.h>
 
 @interface RPTTripPlannerViewController () {
     UISearchBar *sbrFrom;
@@ -51,19 +52,6 @@
     sbrTo.placeholder = @"Address, Intersection, Landmark";
     [viewHeader addSubview:sbrTo];
     
-    UILabel *lblInfo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 100)];
-    lblInfo.textAlignment = NSTextAlignmentCenter;
-    lblInfo.text = @"Please fill in\nthe above fields";
-    lblInfo.numberOfLines = 2;
-    lblInfo.center = self.view.center;
-    [self.view addSubview:lblInfo];
-    
-    webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(viewHeader.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)-CGRectGetMaxY(viewHeader.frame)) configuration:[WKWebViewConfiguration new]];
-    webView.backgroundColor = [UIColor clearColor];
-    webView.scrollView.backgroundColor = [UIColor clearColor];
-    webView.opaque = NO;
-    [self.view addSubview:webView];
-    
     strDirection = @"Leave Now";
     UIButton *btnDeparture = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnDeparture addTarget:self action:@selector(handleDeparture:) forControlEvents:UIControlEventTouchUpInside];
@@ -84,6 +72,27 @@
     [btnTime setTitle:[NSString stringWithFormat:@"Time: %@",strTime] forState:UIControlStateNormal];
     [btnTime setFrame:CGRectMake(CGRectGetWidth(viewHeader.frame)/3*2, CGRectGetMaxY(sbrTo.frame)+5, CGRectGetWidth(viewHeader.frame)/3, 40)];
     [viewHeader addSubview:btnTime];
+    
+    UIButton *btnGo = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnGo addTarget:self action:@selector(executeAPI) forControlEvents:UIControlEventTouchUpInside];
+    [btnGo setTitle:@"Get Directions" forState:UIControlStateNormal];
+    [btnGo setFrame:CGRectMake(0, CGRectGetMaxY(btnTime.frame)+5, CGRectGetWidth(viewHeader.frame), 40)];
+    [viewHeader addSubview:btnGo];
+    
+    [viewHeader setFrame:CGRectMake(CGRectGetMinX(viewHeader.frame), CGRectGetMinY(viewHeader.frame), CGRectGetWidth(viewHeader.frame), CGRectGetMaxY(btnGo.frame))];
+    
+    UILabel *lblInfo = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 100)];
+    lblInfo.textAlignment = NSTextAlignmentCenter;
+    lblInfo.text = @"Please fill in\nthe above fields";
+    lblInfo.numberOfLines = 2;
+    lblInfo.center = self.view.center;
+    [self.view addSubview:lblInfo];
+    
+    webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(viewHeader.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)-CGRectGetMaxY(viewHeader.frame)) configuration:[WKWebViewConfiguration new]];
+    webView.backgroundColor = [UIColor clearColor];
+    webView.scrollView.backgroundColor = [UIColor clearColor];
+    webView.opaque = NO;
+    [self.view addSubview:webView];
 }
 
 #pragma mark - Actions
@@ -98,7 +107,7 @@
 - (void)handleDate:(UIButton*)sender {
     [ActionSheetDatePicker showPickerWithTitle:@"Select a date" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] minimumDate:[NSDate date] maximumDate:nil doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"dd/mm/yy"];
+        [dateFormatter setDateFormat:@"dd/mm/yyyy"];
         strDate = [dateFormatter stringFromDate:selectedDate];
         [sender setTitle:strDate forState:UIControlStateNormal];
     } cancelBlock:^(ActionSheetDatePicker *picker) {
@@ -115,8 +124,17 @@
 }
 - (void)executeAPI {
     if (![sbrFrom.text isEqualToString:@""] || ![sbrTo.text isEqualToString:@""] || ![strDate isEqualToString:@"Select"] || ![strTime isEqualToString:@"Select"]) {
-        NSString *url = [NSString stringWithUTF8String:@"http://www.ripta.com/site/get_directions.php"];
         
+        NSString *directionCode = @"dep";
+        if ([strDirection isEqualToString:@"Arrive By"]) directionCode = @"arr";
+        else if ([strDirection isEqualToString:@"Depart At"]) directionCode = @"dep";
+        
+        [webView loadRequest:[[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://www.ripta.com/site/get_directions.php" parameters:@{
+                                                                                                                                                                    @"from" : sbrFrom.text,
+                                                                                                                                                                    @"to" : sbrTo.text,
+                                                                                                                                                                @"direction" : directionCode,                                                                                                                                                                    @"date" : strDate,
+                                                                                                                                                                    @"time" : strTime,
+                                                                                                                                                                    } error:nil]];
     }
 }
 @end

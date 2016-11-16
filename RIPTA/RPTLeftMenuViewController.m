@@ -58,7 +58,6 @@
                      @"Busses",
                      @"Routes",
                      @"Trip Planner",
-                     @"Settings",
                      ];
     
     [self.view addSubview:_tableView];
@@ -70,7 +69,7 @@
 
 #pragma mark - Actions
 - (void)handleInfo:(UIButton*)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Info" message:@"Copyright © Brian & Preston\n\nThird part libraries retain their rights.\n- Chameleon (The MIT License (MIT))\n- RESideMenu (The MIT License (MIT))\n\nInformation is provided my RIPTA" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Info" message:@"Copyright © Brian & Preston\n\nThird part libraries retain their rights.\n- Chameleon (The MIT License (MIT))\n- RESideMenu (The MIT License (MIT))\n- ActionSheetPicker-3.0 (BSD License)\n- AFNetworking (The MIT License (MIT))\n\nInformation is provided my RIPTA" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
