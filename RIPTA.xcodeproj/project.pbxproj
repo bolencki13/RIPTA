@@ -13,6 +13,7 @@
 		2260983F1DCA7DB200BEF13D /* RPTTripPlannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2260983C1DCA7DB200BEF13D /* RPTTripPlannerViewController.m */; };
 		226098421DCA7DDB00BEF13D /* GradientPink.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 226098401DCA7DDB00BEF13D /* GradientPink.jpg */; };
 		226098431DCA7DDB00BEF13D /* GradientPlanner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 226098411DCA7DDB00BEF13D /* GradientPlanner.jpg */; };
+		226EB49F1DD669FF006666D0 /* RPTPdf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 226EB49E1DD669FF006666D0 /* RPTPdf.plist */; };
 		4005C3B61DC2BCC7005C337D /* RPTRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */; };
 		4048DBBD1DC167E500498A16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4048DBBC1DC167E500498A16 /* main.m */; };
 		4048DBC01DC167E500498A16 /* RPTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4048DBBF1DC167E500498A16 /* RPTAppDelegate.m */; };
@@ -41,6 +42,7 @@
 		2260983C1DCA7DB200BEF13D /* RPTTripPlannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTTripPlannerViewController.m; sourceTree = "<group>"; };
 		226098401DCA7DDB00BEF13D /* GradientPink.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GradientPink.jpg; sourceTree = "<group>"; };
 		226098411DCA7DDB00BEF13D /* GradientPlanner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GradientPlanner.jpg; sourceTree = "<group>"; };
+		226EB49E1DD669FF006666D0 /* RPTPdf.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RPTPdf.plist; sourceTree = "<group>"; };
 		4005C3B41DC2BCC7005C337D /* RPTRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTRequestHandler.h; sourceTree = "<group>"; };
 		4005C3B51DC2BCC7005C337D /* RPTRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTRequestHandler.m; sourceTree = "<group>"; };
 		4048DBB81DC167E500498A16 /* RIPTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RIPTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 				4048DBC71DC167E500498A16 /* Assets.xcassets */,
 				4048DBC91DC167E500498A16 /* LaunchScreen.storyboard */,
 				4048DBCC1DC167E500498A16 /* Info.plist */,
+				226EB49E1DD669FF006666D0 /* RPTPdf.plist */,
 				4048DBBB1DC167E500498A16 /* Supporting Files */,
 			);
 			path = RIPTA;
@@ -246,7 +249,7 @@
 				TargetAttributes = {
 					4048DBB71DC167E500498A16 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 9UKYMVL752;
+						DevelopmentTeam = E9DR4Q658S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -276,6 +279,7 @@
 			files = (
 				226098431DCA7DDB00BEF13D /* GradientPlanner.jpg in Resources */,
 				4048DBCB1DC167E500498A16 /* LaunchScreen.storyboard in Resources */,
+				226EB49F1DD669FF006666D0 /* RPTPdf.plist in Resources */,
 				4048DBC81DC167E500498A16 /* Assets.xcassets in Resources */,
 				4048DBC61DC167E500498A16 /* Main.storyboard in Resources */,
 				226098421DCA7DDB00BEF13D /* GradientPink.jpg in Resources */,
@@ -472,7 +476,7 @@
 			baseConfigurationReference = 8524E77AFEDC6A25309C80AA /* Pods-RIPTA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9UKYMVL752;
+				DEVELOPMENT_TEAM = E9DR4Q658S;
 				INFOPLIST_FILE = RIPTA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bolencki13.RIPTA;
@@ -485,7 +489,7 @@
 			baseConfigurationReference = 4BF8EF755974FE3A956093A8 /* Pods-RIPTA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9UKYMVL752;
+				DEVELOPMENT_TEAM = E9DR4Q658S;
 				INFOPLIST_FILE = RIPTA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bolencki13.RIPTA;

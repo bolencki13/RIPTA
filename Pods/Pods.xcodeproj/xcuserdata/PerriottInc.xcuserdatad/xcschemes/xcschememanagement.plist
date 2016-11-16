@@ -17,16 +17,26 @@
 		<key>Pods-RIPTA.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>RESideMenu.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>49CCC71A52B88610D469727CCAABBD50</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>834130EDEA6ABFC84777433FFFD0CC58</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
 		<dict>
 			<key>primary</key>

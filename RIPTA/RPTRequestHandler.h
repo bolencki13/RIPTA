@@ -13,6 +13,8 @@
 @optional
 - (void)requestHandler:(RPTRequestHandler*)request didFindBusses:(NSArray <RPTBus *> *)busses;
 - (void)requestHandler:(RPTRequestHandler*)request didNotFindBussesWithError:(NSError *)error;
+- (void)requestHandler:(RPTRequestHandler *)request didScrapeSite:(NSArray *)siteInfo;
+
 @end
 
 @interface RPTRequestHandler : NSObject
@@ -28,4 +30,7 @@
  *
  */
 - (void)getBusses;
+- (void)getSiteInfo:(NSString *)RTNum;
+
+
 @end

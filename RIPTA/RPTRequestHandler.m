@@ -43,4 +43,115 @@
         if ([_delegate respondsToSelector:@selector(requestHandler:didFindBusses:)]) [_delegate requestHandler:self didFindBusses:aryBusses];
     }] resume];
 }
+- (void)getSiteInfo:(NSString *)RTNum{
+    
+    NSString *url = @"http://www.ripta.com/";
+    NSString *fullstring = [url stringByAppendingString:RTNum];
+    
+ [[[NSURLSession sharedSession]dataTaskWithURL:[NSURL URLWithString:fullstring] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
+        if (error) {
+            NSLog(@"Check it");
+        }
+     
+     NSString *dataString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+     NSLog(@"Data string format : %@", dataString);
+     
+     NSRange Stoprange = [dataString rangeOfString:@"sched-table"];
+     NSString *subString = [[dataString substringFromIndex:NSMaxRange(Stoprange)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+     
+     NSRange Timerange = [dataString rangeOfString:@"tbody"];
+     NSString *substring2 = [[dataString substringFromIndex:NSMaxRange(Timerange)]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+     
+     
+     NSMutableArray *LabelNames = [[NSMutableArray alloc]init];
+     NSString *LabelName = nil;
+     
+     NSScanner *scanner = [NSScanner scannerWithString:subString];
+     //Grabs everything after sched-label and throws it in array
+     
+     while (![scanner isAtEnd]) {
+         [scanner scanUpToString:@"sched-label" intoString:nil];
+         NSCharacterSet *charset = [NSCharacterSet characterSetWithCharactersInString:@"\"'<>"];
+         
+         [scanner scanUpToCharactersFromSet:charset intoString:nil];
+         [scanner scanCharactersFromSet:charset intoString:nil];
+         [scanner scanUpToCharactersFromSet:charset intoString:&LabelName];
+         [LabelNames addObject:LabelName];
+         
+     }
+     
+     //Removes the duuplcates in the array by changing it to an ordered set
+     NSArray *NoDups = [[NSOrderedSet orderedSetWithArray:LabelNames]array];
+     NSLog(@"Non Duplicated Label Names ; %@", NoDups);
+     
+     
+     
+     NSScanner *scanner3 = [NSScanner scannerWithString:subString];
+     NSString *TBodyTimes;
+     while (![scanner3 isAtEnd]) {
+         [scanner3 scanUpToString:@"<tbody>" intoString:nil];
+         [scanner3 scanString:@"<tbody>" intoString:nil];
+         [scanner3 scanUpToString:@"</tbody>" intoString:&TBodyTimes];
+     }
+     //NSLog(@"TBody Object : %@", TBodyTimes);
+     
+     
+     //Loading scanner with substring2 b/c TbodyTimes doesnt load everytime
+     
+     NSString *time = nil;
+     NSMutableArray *TimeTable = [[NSMutableArray alloc]init];
+     NSScanner *scanner4 = [NSScanner scannerWithString:substring2];
+     while (![scanner4 isAtEnd]) {
+         [scanner4 scanUpToString:@"td" intoString:nil];
+         NSCharacterSet *charset = [NSCharacterSet characterSetWithCharactersInString:@"\"'<>/tdrah"];
+         
+         [scanner4 scanUpToCharactersFromSet:charset intoString:nil];
+         [scanner4 scanCharactersFromSet:charset intoString:nil];
+         [scanner4 scanUpToCharactersFromSet:charset intoString:&time];
+         [TimeTable addObject:time];
+         //[scanner scanUpToString:@"span" intoString:nil];
+     }
+    // NSLog(@"Clear Times : %@", TimeTable);
+     
+     int AllTimesCount = (int)TimeTable.count;
+     
+     
+     for (int x = 0; x > AllTimesCount; x++){
+         
+         if ([TimeTable objectAtIndex:x] == [TimeTable objectAtIndex:x-1]) {
+             [TimeTable removeObjectAtIndex:x];
+         }
+     }
+     
+    
+     
+     NSMutableArray *ArrayOfArrays = [NSMutableArray array];
+     
+     unsigned long remainingItems = [TimeTable count];
+     unsigned long j = 0;
+     
+     while (remainingItems) {
+         NSRange range = NSMakeRange(j, MIN([NoDups count], remainingItems));
+         NSArray *subArray = [TimeTable subarrayWithRange:range];
+         [ArrayOfArrays addObject:subArray];
+         remainingItems = remainingItems - range.length;
+         j = j + range.length;
+         
+     }
+     NSLog(@"Array of Arrays : %@", ArrayOfArrays);
+     
+     
+     
+     
+     
+     if ([_delegate respondsToSelector:@selector(requestHandler:didScrapeSite:)]) [_delegate requestHandler:self didScrapeSite:ArrayOfArrays];
+     
+     
+ }]resume] ;
+    
+    
+    
+
+
+}
 @end

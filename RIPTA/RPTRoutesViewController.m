@@ -10,7 +10,7 @@
 #import "RESideMenu.h"
 
 
-@interface RPTRoutesViewController () <MKMapViewDelegate, UITableViewDataSource, UITabBarDelegate>
+@interface RPTRoutesViewController () <MKMapViewDelegate, UITableViewDataSource, UITabBarDelegate, RPTRequestHandlerDelegate>
 
 
 
@@ -24,6 +24,8 @@
     
     
     [self SetUpMapView];
+    [[RPTRequestHandler sharedHandler] setDelegate:self];
+    [[RPTRequestHandler sharedHandler] getBusses];
     
     
 }
@@ -170,24 +172,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
     /*
      Check if currently visible controller is equal to item selected.
      if not - fade to new UIViewController
      else close menu
-     
      */
     
     }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)requestHandler:(RPTRequestHandler *)request didFindBusses:(NSArray<RPTBus *> *)busses{
+    
 }
-*/
 
 @end

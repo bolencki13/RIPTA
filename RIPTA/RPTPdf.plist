@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Route Numbers</key>
+	<array>
+		<string>Rt#1</string>
+		<string>Rt#3</string>
+		<string>Rt#6</string>
+		<string>Rt#8</string>
+		<string>Rt#9</string>
+		<string>Rt#10</string>
+		<string>Rt#R</string>
+		<string>Rt#12</string>
+		<string>Rt#13</string>
+		<string>Rt#14</string>
+		<string>Rt#17</string>
+		<string>Rt#18</string>
+		<string>Rt#19</string>
+		<string>Rt#20</string>
+		<string>Rt#21</string>
+		<string>Rt#22</string>
+		<string>Rt#27</string>
+		<string>Rt#28</string>
+		<string>Rt#29</string>
+		<string>Rt#30</string>
+		<string>Rt#31</string>
+		<string>Rt#32</string>
+		<string>Rt#33</string>
+		<string>Rt#34</string>
+		<string>Rt#35</string>
+		<string>Rt#40</string>
+		<string>Rt#49</string>
+		<string>Rt#50</string>
+		<string>Rt#51</string>
+		<string>Rt#54</string>
+		<string>Rt#55</string>
+		<string>Rt#56</string>
+		<string>Rt#57</string>
+		<string>Rt#58</string>
+		<string>Rt#59</string>
+		<string>Rt#60</string>
+		<string>Rt#61</string>
+		<string>Rt#63</string>
+		<string>Rt#64</string>
+		<string>Rt#65</string>
+		<string>Rt#66</string>
+		<string>Rt#67</string>
+		<string>Rt#69</string>
+		<string>Rt#71</string>
+		<string>Rt#72</string>
+		<string>Rt#73</string>
+		<string>Rt#75</string>
+		<string>Rt#76</string>
+		<string>Rt#78</string>
+		<string>Rt#80</string>
+		<string>Rt#87</string>
+		<string>Rt#92</string>
+		<string>Rt#95</string>
+		<string>Rt#203</string>
+		<string>Rt#204</string>
+		<string>Rt#210</string>
+		<string>Rt#211</string>
+		<string>Rt#231</string>
+		<string>Rt#242</string>
+		<string>Rt#281</string>
+		<string>Rt#282</string>
+		<string>Rt#301</string>
+	</array>
+	<key>Route Names</key>
+	<array>
+		<string>Hope - Eddy</string>
+		<string>Warwick Avenue</string>
+		<string>Prairie Ave - Roger Williams Park Zoo</string>
+		<string>Jefferson Blvd. Park-n-Ride</string>
+		<string>Pascoag Park-n-Ride</string>
+		<string>North Scituate</string>
+		<string>R-Line Broad St - N. Main St</string>
+		<string>Arctic / 117</string>
+		<string>Coventry - Arctic - Warwick Mall</string>
+		<string>West Bay</string>
+		<string>Dyer - Pocasset</string>
+		<string>Union Avenue</string>
+		<string>Plainfield - Westminster</string>
+		<string>Elmwood Ave - T.F. Green Airport</string>
+		<string>Reservoir - Garden City</string>
+		<string>Pontiac Avenue</string>
+		<string>Broadway - Manton</string>
+		<string>Broadway - Hartford</string>
+		<string>Cowesset - Kent County</string>
+		<string>Arlington - Oaklawn</string>
+		<string>Cranston Street</string>
+		<string>East Providence - Wampanoag</string>
+		<string>Riverside</string>
+		<string>East Providence</string>
+		<string>Rumford - Newport Ave</string>
+		<string>Butler - Elmgrove</string>
+        <string>Camp Street - Miriam Hospital</string>
+		<string>Douglas Avenue</string>
+		<string>Charles Street</string>
+		<string>Lincoln - Woonsocket</string>
+        <string>Admiral - Providence College</string>
+		<string>Chalkstone Avenue</string>
+		<string>Smith Street</string>
+        <string>Mineral Spring - North Providence</string>
+        <string>North Smithfield - Lincoln Mall</string>
+		<string>Providence - Newport</string>
+        <string>Tiverton - East Bay Park-n-Ride</string>
+        <string>Broadway - Middletown Shops</string>
+		<string>Newport - URI Kingston</string>
+		<string>Wakefield Park-n-Ride</string>
+		<string>URI - Galilee</string>
+        <string>Bellevue - Salve Regina Univ.</string>
+		<string>The Hill Climber</string>
+		<string>Broad Street</string>
+		<string>Weeden - Central Falls</string>
+        <string>Mineral Spring - Twin River - CCRI</string>
+		<string>Dexter Street</string>
+		<string>Central Avenue</string>
+        <string>Beverage Hill Ave - East Providence</string>
+		<string>Armistice Blvd.</string>
+		<string>Fairmount - Walnut Hill</string>
+        <string>RI College - Federal Hill - East Side</string>
+		<string>Westerly Park-n-Ride</string>
+		<string>Narragansett</string>
+		<string>Westerly</string>
+		<string>Kingston</string>
+        <string>Blue Line and The Hill
+            Climber </string>
+		<string>South Aquidneck</string>
+		<string>West Warwick - Coventry</string>
+		<string>Woonsocket</string>
+		<string>Pascoag - Slatersville</string>
+        <string>Westerly - Hope Valley Rural Ride</string>
+	</array>
+</dict>
+</plist>
