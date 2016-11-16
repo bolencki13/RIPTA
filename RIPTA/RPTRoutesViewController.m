@@ -104,17 +104,28 @@
     
     _MiddleView = [[UIView alloc]init];
     _MiddleView.translatesAutoresizingMaskIntoConstraints = false;
-    _MiddleView.backgroundColor = [UIColor blueColor];
+    
     _MiddleView.layer.cornerRadius = 5;
     _MiddleView.layer.shadowOffset = CGSizeMake(-15, 20);
     _MiddleView.layer.shadowRadius = 5;
     _MiddleView.layer.shadowOpacity = 1;
+    
+  
     [self.view addSubview:_MiddleView];
     
     [_MiddleView.centerXAnchor constraintEqualToAnchor:_BottomHolderView.centerXAnchor].active = TRUE;
     [_MiddleView.widthAnchor constraintEqualToAnchor:_BottomHolderView.widthAnchor multiplier:.87].active = TRUE;
     [_MiddleView.bottomAnchor constraintEqualToAnchor:_BottomHolderView.topAnchor constant:-15].active =TRUE;
     [_MiddleView.heightAnchor constraintEqualToConstant:100].active =TRUE;
+    
+    
+    NSMutableArray *colorArray = [[NSMutableArray alloc] initWithArray:[NSArray arrayOfColorsWithColorScheme:ColorSchemeComplementary usingColor:[UIColor blueColor] withFlatScheme:YES]];
+    
+    
+    //_MiddleView.backgroundColor = colorArray[arc4random_uniform([colorArray count])];
+    _MiddleView.backgroundColor = [UIColor flatPurpleColorDark];
+    
+    
     
     _PopUpLabel = [[UILabel alloc]init];
     _PopUpLabel2 = [[UILabel alloc]init];
@@ -247,10 +258,10 @@
             _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
             
             [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:.45f];
-                [_PopUpLabel3 setAlpha:.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:.75f];
+                [_PopUpLabel3 setAlpha:.75f];
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     [_PopUpLabel setAlpha:0.f];
@@ -267,10 +278,10 @@
             _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
             _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
             [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:.45f];
-                [_PopUpLabel3 setAlpha:.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:.75f];
+                [_PopUpLabel3 setAlpha:.75f];
 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -289,10 +300,10 @@
             _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
             _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
             [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:0.45];
-                [_PopUpLabel3 setAlpha:0.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:0.75f];
+                [_PopUpLabel3 setAlpha:0.75f];
 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -310,10 +321,10 @@
         {  _PopUpLabel.text = [_Names objectAtIndex:indexPath.row];
             _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
             _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];            [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:0.45f];
-                [_PopUpLabel3 setAlpha:0.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:0.75f];
+                [_PopUpLabel3 setAlpha:0.75f];
 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -332,10 +343,10 @@
             _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
            _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
             [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:0.45f];
-                [_PopUpLabel3 setAlpha:0.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:0.75f];
+                [_PopUpLabel3 setAlpha:0.75f];
 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -353,10 +364,10 @@
             _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
             _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
             [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:0.45f];
-                [_PopUpLabel3 setAlpha:0.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:0.75f];
+                [_PopUpLabel3 setAlpha:0.75f];
 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -375,10 +386,10 @@
             _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
             _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
             [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:0.45f];
-                [_PopUpLabel3 setAlpha:0.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:0.75f];
+                [_PopUpLabel3 setAlpha:0.75f];
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -398,10 +409,10 @@
             _PopUpLabel2.text = [NSString stringWithFormat:@"Route #%@", _RouteNum];
             _PopUpLabel3.text = [NSString stringWithFormat:@"The next bus leaving from this station is at approximately %@",[[_Times objectAtIndex:arc4random_uniform((unsigned int)_Times.count)]objectAtIndex:arc4random_uniform(4)]];
             [UIView animateWithDuration:1.5f delay:0.f options:UIViewAnimationOptionCurveEaseIn animations:^{
-                [_PopUpLabel setAlpha:.45f];
-                [_MiddleView setAlpha:.45f];
-                [_PopUpLabel2 setAlpha:0.45f];
-                [_PopUpLabel3 setAlpha:0.45f];
+                [_PopUpLabel setAlpha:.75f];
+                [_MiddleView setAlpha:.55f];
+                [_PopUpLabel2 setAlpha:0.75f];
+                [_PopUpLabel3 setAlpha:0.75f];
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:5.f delay:3.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
